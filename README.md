@@ -47,7 +47,7 @@ Benefícios ✨
 
 Recursos 🛠️
 
-  . Gestão de Mesas: Permite o cadastro e gerenciamento das mesas do restaurante, facilitando o controle de ocupação e disponibilidade.
+  . Gestão de Mesas: Permite o cadastro e gerenciamento das mesas do restaurante, facilitando o controle de ocupação, disponibilidade, produtos(pratos,bebidas, etc) que estão/foram          consuimidos.
  
   
   
@@ -57,7 +57,7 @@ Recursos 🛠️
   
   
   
-  .  Pedidos e Vendas: Facilita o registro e acompanhamento de pedidos, além de fornecer insights sobre as vendas, como os itens mais populares e o faturamento total
+  .  Pedidos/Comandas e Vendas: Facilita o registro e acompanhamento de pedidos, além de fornecer insights sobre as vendas, como os itens mais populares e o faturamento total, sabendo         ao final como está o consumo da mesa durante as vendas e ao fehcar os pedidos(comandas
   
   
   
