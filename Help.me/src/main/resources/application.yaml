@@ -1,0 +1,24 @@
+security:
+  jwt:
+    token:
+      secret-key: 33jj336
+      expire-length: 3600000
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/db_helpme_test?useTimezone=true&serverTimezone=UTC
+    username: root
+    password: 35828889
+  jpa:
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+    show-sql: false
+springdoc:
+  pathsToMatch:
+    - /auth/**
+    - /api/**/v1/**
+  swagger-ui:
+    use-root-path: true
