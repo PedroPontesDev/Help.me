@@ -1,10 +1,10 @@
-package com.devPontes.Help.me;
+package com.br.trentor.Help.me;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class StartupTests {
+class ApplicationTests {
 
 	@Test
 	void contextLoads() {
