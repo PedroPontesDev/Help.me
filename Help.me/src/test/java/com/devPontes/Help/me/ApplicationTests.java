@@ -1,4 +1,4 @@
-package com.br.trentor.Help.me;
+package com.devPontes.Help.me;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
