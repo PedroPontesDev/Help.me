@@ -1,13 +1,16 @@
 package com.br.trentor.Help.me.model.entities;
 
 import java.math.BigDecimal;
+import java.time.Duration;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 
 @Entity
 public class Garcom extends DefaultUser {
@@ -22,14 +25,17 @@ public class Garcom extends DefaultUser {
 	@Column(name = "horario_saida_semana")
 	private LocalDateTime horarioSaida;
 
-	@Column(name = "horas_trabalhadas_mes")
-	private LocalDateTime horasTrabalhadas;
+	@Column(name = "total_horas_trabalhadas_mes")
+	private Duration horasTrabalhadas;
 
 	@Column(name = "salario_funcionario")
 	private BigDecimal salario;
+	
+	@OneToOne(mappedBy = "garcom")
+	private Comanda comandaDoGarcom;
 
 	public Garcom(String nome, String username, String password, Float cpf, Long id, LocalDateTime horarioEntrada,
-			LocalDateTime horarioSaida, LocalDateTime horasTrabalhadas, BigDecimal salario) {
+			LocalDateTime horarioSaida, Duration horasTrabalhadas, BigDecimal salario) {
 		super(nome, username, password, cpf);
 		this.id = id;
 		this.horarioEntrada = horarioEntrada;
@@ -66,20 +72,53 @@ public class Garcom extends DefaultUser {
 		this.horarioSaida = horarioSaida;
 	}
 
-	public LocalDateTime getHorasTrabalhadas() {
+	public Duration getHorasTrabalhadas() {
 		return horasTrabalhadas;
 	}
 
-	public void setHorasTrabalhadas(LocalDateTime horasTrabalhadas) {
+	public void setHorasTrabalhadas(Duration horasTrabalhadas) {
 		this.horasTrabalhadas = horasTrabalhadas;
 	}
 
-	public Double getSalario() {
+	public BigDecimal getSalario() {
 		return salario;
 	}
 
-	public void setSalario(Double salario) {
+	public void setSalario(BigDecimal salario) {
 		this.salario = salario;
 	}
+	
+	public Long calcularHorasTrabalhadas(LocalDateTime horarioEntrada, LocalDateTime horarioSaida) {
+		Duration calculoPorHora = Duration.between(horarioEntrada, horarioSaida);
+		this.horasTrabalhadas = calculoPorHora;
+		return calculoPorHora.toHours();
+		
+	}
 
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Garcom other = (Garcom) obj;
+		return Objects.equals(id, other.id);
+	}
+
+	@Override
+	public String toString() {
+		return "Garcom [id=" + id + ", horarioEntrada=" + horarioEntrada + ", horarioSaida=" + horarioSaida
+				+ ", horasTrabalhadas=" + horasTrabalhadas + ", salario=" + salario + "]";
+	}
+	
+	
+	
+	
 }
