@@ -1,5 +1,6 @@
 package com.br.trentor.Help.me.model.entities;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
@@ -9,27 +10,26 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
-public class Garcom extends DefaultUser{
+public class Garcom extends DefaultUser {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.UUID)
 	private Long id;
-	
+
 	@Column(name = "horario_entrada_semana")
 	private LocalDateTime horarioEntrada;
-	
-	
+
 	@Column(name = "horario_saida_semana")
 	private LocalDateTime horarioSaida;
-	
+
 	@Column(name = "horas_trabalhadas_mes")
 	private LocalDateTime horasTrabalhadas;
-	
+
 	@Column(name = "salario_funcionario")
-	private Double salario;
-	
+	private BigDecimal salario;
+
 	public Garcom(String nome, String username, String password, Float cpf, Long id, LocalDateTime horarioEntrada,
-			LocalDateTime horarioSaida, LocalDateTime horasTrabalhadas, Double salario) {
+			LocalDateTime horarioSaida, LocalDateTime horasTrabalhadas, BigDecimal salario) {
 		super(nome, username, password, cpf);
 		this.id = id;
 		this.horarioEntrada = horarioEntrada;
@@ -37,12 +37,10 @@ public class Garcom extends DefaultUser{
 		this.horasTrabalhadas = horasTrabalhadas;
 		this.salario = salario;
 	}
-	
+
 	public Garcom() {
-		
+		super();
 	}
-
-
 
 	public Long getId() {
 		return id;
@@ -84,7 +82,4 @@ public class Garcom extends DefaultUser{
 		this.salario = salario;
 	}
 
-	
-	
-	
 }
