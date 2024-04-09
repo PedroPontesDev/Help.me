@@ -21,9 +21,9 @@ public class Comanda {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@OneToMany
-	@JsonIgnore
-	private Set<Item> items = new TreeSet<>();
+//	@OneToMany
+//	@JsonIgnore
+///	private Set<Item> items = new TreeSet<>();
 
 	@OneToOne
 	private Garcom garcom;
@@ -34,9 +34,8 @@ public class Comanda {
 	@Column(name = "valor_total_comanda")
 	private BigDecimal valorTotalComanda;
 
-	public Comanda(Long id, Set<Item> items, Garcom garcom, Mesa mesaPertecente, BigDecimal valorTotalComanda) {
+	public Comanda(Long id, Garcom garcom, Mesa mesaPertecente, BigDecimal valorTotalComanda) {
 		this.id = id;
-		this.items = items;
 		this.garcom = garcom;
 		this.mesaPertecente = mesaPertecente;
 		this.valorTotalComanda = valorTotalComanda;
@@ -52,14 +51,6 @@ public class Comanda {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public Set<Item> getItems() {
-		return items;
-	}
-
-	public void setItems(Set<Item> items) {
-		this.items = items;
 	}
 
 	public Garcom getGarcom() {
@@ -88,7 +79,7 @@ public class Comanda {
 
 	@Override
 	public String toString() {
-		return "Comanda [id=" + id + ", items=" + items + ", garcom=" + garcom + ", mesaPertecente=" + mesaPertecente
+		return "Comanda [id=" + id + ", garcom=" + garcom + ", mesaPertecente=" + mesaPertecente
 				+ ", valorTotalComanda=" + valorTotalComanda + "]";
 	}
 

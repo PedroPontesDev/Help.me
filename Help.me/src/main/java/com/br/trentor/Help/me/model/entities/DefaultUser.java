@@ -35,8 +35,8 @@ public abstract class DefaultUser {
 
 	import java.util.Objects;
 
-	@MappedSuperclass
-	public abstract class DefaultUser {
+@MappedSuperclass
+public abstract class DefaultUser {
 
 		@Column(name = "nome_pessoal")
 		private String nome;
@@ -113,55 +113,3 @@ public abstract class DefaultUser {
 		}
 
 	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public Float getCpf() {
-		return cpf;
-	}
-
-	public void setCpf(Float cpf) {
-		this.cpf = cpf;
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(username);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		DefaultUser other = (DefaultUser) obj;
-		return Objects.equals(username, other.username);
-	}
-
-	@Override
-	public String toString() {
-		return "DefaultUser [nome=" + nome + ", username=" + username + ", password=" + password + ", cpf=" + cpf + "]";
-	}
-
-}
