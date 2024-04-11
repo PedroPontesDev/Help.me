@@ -7,8 +7,5 @@ CREATE TABLE tb_usuarios (
   CONSTRAINT chk_username CHECK (LENGTH(username) >= 5)
 );
 
-CREATE TABLE tb_roles (
-  id BIGINT PRIMARY KEY AUTO_INCREMENT,
-  tipo_de_usuario ENUM('ADMINISTRADOR', 'GERENTE', 'GARCOM', 'COMUM') NOT NULL UNIQUE
-);
+
 

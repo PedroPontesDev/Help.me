@@ -18,11 +18,8 @@ public class Comanda {
 
 	private Long id;
 
-
 	private Garcom garcom;
 	private Mesa mesaPertecente;
-
-	
 	private BigDecimal valorTotalComanda;
 
 	public Comanda(Long id, Garcom garcom, Mesa mesaPertecente, BigDecimal valorTotalComanda) {
