@@ -14,24 +14,15 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 
-@Entity
 public class Comanda {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-//	@OneToMany
-//	@JsonIgnore
-///	private Set<Item> items = new TreeSet<>();
 
-	@OneToOne
 	private Garcom garcom;
-
-	@OneToOne
 	private Mesa mesaPertecente;
 
-	@Column(name = "valor_total_comanda")
+	
 	private BigDecimal valorTotalComanda;
 
 	public Comanda(Long id, Garcom garcom, Mesa mesaPertecente, BigDecimal valorTotalComanda) {
