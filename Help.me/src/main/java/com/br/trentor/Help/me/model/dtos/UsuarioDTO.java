@@ -3,6 +3,9 @@ package com.br.trentor.Help.me.model.dtos;
 import java.io.Serializable;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
+@JsonPropertyOrder(value = "id, username, passsword, cpf, nome")
 public class UsuarioDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
