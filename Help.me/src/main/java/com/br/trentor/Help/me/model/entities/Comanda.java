@@ -1,25 +1,31 @@
 package com.br.trentor.Help.me.model.entities;
 
 import java.math.BigDecimal;
-import java.util.Set;
-import java.util.TreeSet;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
 
+@Entity
+@Table(name = "tb_comandas")
 public class Comanda {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@ManyToOne
 	private Garcom garcom;
+	
+	@OneToOne(mappedBy = "comanda")
 	private Mesa mesaPertecente;
+
+	@Column(name = "valor_comanda")
 	private BigDecimal valorTotalComanda;
 
 	public Comanda(Long id, Garcom garcom, Mesa mesaPertecente, BigDecimal valorTotalComanda) {

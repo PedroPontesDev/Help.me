@@ -14,7 +14,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "tb_papeis_usuario")
+@Table(name = "tb_permissoes")
 public class Role implements Serializable{
 	private static final long serialVersionUID = 1L;
 

@@ -3,7 +3,7 @@ package com.br.trentor.Help.me.model.entities;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-import com.br.trentor.Help.me.model.entities.enumerateds.StatusDaMesa;
+import com.br.trentor.Help.me.model.entities.enumerated.StatusDaMesa;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -12,14 +12,20 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
 
+@Entity
+@Table(name = "tb_mesa")
 public class Mesa {
 
-	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
+	@OneToOne
 	private Comanda comanda;
 	
+	@Enumerated(EnumType.STRING)
 	private StatusDaMesa status;
 	
 	private LocalDateTime inicioOcupacao;

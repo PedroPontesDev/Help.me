@@ -11,11 +11,11 @@ spring:
     password: 35828889
   jpa:
     hibernate:
-      ddl-auto: none
+      ddl-auto: auto
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQL8Dialect
-    show-sql: false
+    show-sql: true
 springdoc:
   pathsToMatch:
     - /auth/**

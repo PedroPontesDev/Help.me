@@ -1,4 +1,4 @@
-package com.br.trentor.Help.me.model.entities.enumerateds;
+package com.br.trentor.Help.me.model.entities.enumerated;
 
 public enum StatusDaMesa {
 

@@ -13,10 +13,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinColumns;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -39,33 +38,15 @@ public class Garcom extends Usuario {
     @Column(name = "salario_funcionario")
     private BigDecimal salario;
 
-    @OneToOne(mappedBy = "garcom")
+    @OneToMany(mappedBy = "garcom")
     private Comanda comandaDoGarcom;
     
     @ManyToMany
-    @JoinTable(  // Anotação JoinTable define a tabela de junção
-    		name = "tb_acessos_usuarios",  // Nome da tabela de junção
-    		joinColumns = @JoinColumn(name = "garcom_id", referencedColumnName = "id"),  // JoinColumn para Garcom
-    		inverseJoinColumns = @JoinColumn(name = "roles_id", referencedColumnName = "id")) //InverseJoinColumn Para Roles
-    
-    private List<Role> acessos = new ArrayList<>();
-
-    public Garcom(Long id, String nome, String username, String password, String cpf,
-			LocalDateTime horarioEntrada, LocalDateTime horarioSaida, Duration horasTrabalhadas, BigDecimal salario,
-			Comanda comandaDoGarcom, List<Role> acessos) {
-		super(id, nome, username, password, cpf);
-		this.horarioEntrada = horarioEntrada;
-		this.horarioSaida = horarioSaida;
-		this.horasTrabalhadas = horasTrabalhadas;
-		this.salario = salario;
-		this.comandaDoGarcom = comandaDoGarcom;
-		this.acessos = acessos;
-	}
-
-
+    @JoinTable(name = "tb_permissao_usuario", joinColumns = @JoinColumn(name = "garcom.id"), inverseJoinColumns = @JoinColumn(name = "role.id"))
+    private List<Role> permissoes = new ArrayList<>();
 
 	public Garcom() {
-        super(); // Adicionei o super() para chamar o construtor padrão da superclasse Usuario
+        super(); 
     }
 
 

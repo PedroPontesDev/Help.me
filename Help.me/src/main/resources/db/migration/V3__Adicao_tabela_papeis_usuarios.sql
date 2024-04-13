@@ -1,4 +1,4 @@
-CREATE TABLE tb_papeis_usuarios (
+CREATE TABLE tb_permissoes_usuarios (
   usuario_id BIGINT NOT NULL,
   roles_id BIGINT NOT NULL,
   FOREIGN KEY (usuario_id) REFERENCES tb_usuarios(id),

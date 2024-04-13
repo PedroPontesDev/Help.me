@@ -4,7 +4,7 @@ public enum TipoUsuario {
 	
 	ADMINISTRADOR,
 	GERENTE,
-	COMUM,
+	CLIENTE,
 	GARACOM;
 
 }
