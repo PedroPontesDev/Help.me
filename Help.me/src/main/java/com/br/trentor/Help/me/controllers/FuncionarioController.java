@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.br.trentor.Help.me.model.dtos.FuncionarioDTO;
-import com.br.trentor.Help.me.services.UsuarioServices;
+import com.br.trentor.Help.me.services.impl.UsuarioServicesImpl;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -17,7 +17,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 public class FuncionarioController {
 
 	@Autowired
-	private UsuarioServices usuarioService;
+	private UsuarioServicesImpl usuarioService;
 	
 	@Operation(summary = "Cria um usuario no banco")
 	public ResponseEntity<FuncionarioDTO> criarUsuario(FuncionarioDTO novoUsuario) {
