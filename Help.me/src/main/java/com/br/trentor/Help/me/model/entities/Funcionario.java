@@ -6,6 +6,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
+import java.util.TreeSet;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -20,37 +22,47 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "tb_garcom")
-public class Garcom extends Usuario {
-    private static final long serialVersionUID = 1L;
+public class Funcionario extends Usuario {
+	private static final long serialVersionUID = 1L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    @Column(name = "horario_entrada_dia")
-    private LocalDateTime horarioEntrada;
+	@Column(name = "horario_entrada_dia")
+	private LocalDateTime horarioEntrada;
 
-    @Column(name = "horario_saida_dia")
-    private LocalDateTime horarioSaida;
+	@Column(name = "horario_saida_dia")
+	private LocalDateTime horarioSaida;
 
-    @Column(name = "total_horas_trabalhadas_mes")
-    private Duration horasTrabalhadas;
-    @Column(name = "salario_funcionario")
-    private BigDecimal salario;
+	@Column(name = "total_horas_trabalhadas_mes")
+	private Duration horasTrabalhadas;
+	@Column(name = "salario_funcionario")
+	private BigDecimal salario;
 
-    @OneToMany(mappedBy = "garcom")
-    private Comanda comandaDoGarcom;
-    
-    @ManyToMany
-    @JoinTable(name = "tb_permissao_usuario", joinColumns = @JoinColumn(name = "garcom.id"), inverseJoinColumns = @JoinColumn(name = "role.id"))
-    private List<Role> permissoes = new ArrayList<>();
+	@OneToMany(mappedBy = "garcom")
+	private Set<Comanda> comandaDoGarcom = new TreeSet();
 
-	public Garcom() {
-        super(); 
-    }
+	@ManyToMany
+	@JoinTable(name = "tb_permissao_usuario", joinColumns = @JoinColumn(name = "garcom.id"), inverseJoinColumns = @JoinColumn(name = "role.id"))
+	private List<Role> permissoes = new ArrayList<>();
 
+	public Funcionario(Long id, String nome, String username, String password, String cpf, LocalDateTime horarioEntrada,
+			LocalDateTime horarioSaida, Duration horasTrabalhadas, BigDecimal salario, Set<Comanda> comandaDoGarcom,
+			List<Role> permissoes) {
+		super(id, nome, username, password, cpf);
+		this.horarioEntrada = horarioEntrada;
+		this.horarioSaida = horarioSaida;
+		this.horasTrabalhadas = horasTrabalhadas;
+		this.salario = salario;
+		this.comandaDoGarcom = comandaDoGarcom;
+		this.permissoes = permissoes;
+	}
 
-    
+	public Funcionario() {
+		super();
+	}
+
 	public Long getId() {
 		return id;
 	}
@@ -91,19 +103,23 @@ public class Garcom extends Usuario {
 		this.salario = salario;
 	}
 
-	public Comanda getComandaDoGarcom() {
+	public Set<Comanda> getComandaDoGarcom() {
 		return comandaDoGarcom;
 	}
 
-	public void setComandaDoGarcom(Comanda comandaDoGarcom) {
-		this.comandaDoGarcom = comandaDoGarcom;
+	public List<Role> getPermissoes() {
+		return permissoes;
+	}
+
+	public void setPermissoes(List<Role> permissoes) {
+		this.permissoes = permissoes;
 	}
 
 	public Long calcularHorasTrabalhadas(LocalDateTime horarioEntrada, LocalDateTime horarioSaida) {
 		Duration calculoPorHora = Duration.between(horarioEntrada, horarioSaida);
 		this.horasTrabalhadas = calculoPorHora;
 		return calculoPorHora.toHours();
-		
+
 	}
 
 	@Override
@@ -119,7 +135,7 @@ public class Garcom extends Usuario {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Garcom other = (Garcom) obj;
+		Funcionario other = (Funcionario) obj;
 		return Objects.equals(id, other.id);
 	}
 
@@ -128,8 +144,5 @@ public class Garcom extends Usuario {
 		return "Garcom [id=" + id + ", horarioEntrada=" + horarioEntrada + ", horarioSaida=" + horarioSaida
 				+ ", horasTrabalhadas=" + horasTrabalhadas + ", salario=" + salario + "]";
 	}
-	
-	
-	
-	
+
 }
