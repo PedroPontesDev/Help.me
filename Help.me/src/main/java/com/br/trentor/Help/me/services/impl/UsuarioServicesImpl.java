@@ -1,6 +1,7 @@
 package com.br.trentor.Help.me.services.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
 
 import com.br.trentor.Help.me.model.dtos.UsuarioDTO;
@@ -8,6 +9,8 @@ import com.br.trentor.Help.me.model.entities.Usuario;
 import com.br.trentor.Help.me.model.mapper.MyMaper;
 import com.br.trentor.Help.me.repositories.UsuarioRepositories;
 import com.br.trentor.Help.me.services.UsuarioServices;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @Service
 public class UsuarioServicesImpl implements UsuarioServices {
@@ -35,9 +38,8 @@ public class UsuarioServicesImpl implements UsuarioServices {
 			mileninha.setUsername(usuarioExistente.getUsername());
 			mileninha = userRepository.save(mileninha);
 		} 
-		return MyMaper.parseObject(entidade.get(), UsuarioDTO.class);
-		
-		
+		var dto = MyMaper.parseObject(entidade.get(), UsuarioDTO.class);
+		dto.
 		
 		
 	}

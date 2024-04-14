@@ -10,6 +10,8 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.TreeSet;
 
+import org.springframework.hateoas.RepresentationModel;
+
 import com.br.trentor.Help.me.model.entities.Comanda;
 import com.br.trentor.Help.me.model.entities.Role;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -21,7 +23,7 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 
 @JsonPropertyOrder(value = "id, username, passsword, cpf, nome")
-public class UsuarioDTO implements Serializable {
+public class UsuarioDTO extends RepresentationModel<UsuarioDTO> implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Long id;
