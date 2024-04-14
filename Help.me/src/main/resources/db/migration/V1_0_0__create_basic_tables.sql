@@ -24,7 +24,7 @@ CREATE TABLE tb_funcionario (
     total_horas_trabalhadas_mes DECIMAL(21,0),
     salario_funcionario DECIMAL(38,2),
     PRIMARY KEY (id),
-    FOREIGN KEY (id_user) REFERENCES tb_usuarios (id)
+    FOREIGN KEY (id) REFERENCES tb_usuarios (id)
 );
 
 CREATE TABLE tb_mesa (

@@ -1,5 +1,6 @@
-package com.br.trentor.Help.me.model.entities;
+package com.br.trentor.Help.me.model.dtos;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.Duration;
 import java.time.LocalDateTime;
@@ -9,49 +10,40 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.TreeSet;
 
+import com.br.trentor.Help.me.model.entities.Comanda;
+import com.br.trentor.Help.me.model.entities.Role;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
 import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
 
-@Entity
-@Table(name = "tb_funcionario")
-public class Funcionario extends Usuario {
+@JsonPropertyOrder(value = "id, username, passsword, cpf, nome")
+public class FuncionarioDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	private String nome;
+	private String username;
+	private String password;
+	private String cpf;
 
-	@Column(name = "horario_entrada_dia")
-	private LocalDateTime horarioEntrada;
-
-	@Column(name = "horario_saida_dia")
 	private LocalDateTime horarioSaida;
-
-	@Column(name = "total_horas_trabalhadas_mes")
 	private Duration horasTrabalhadas;
-	@Column(name = "salario_funcionario")
 	private BigDecimal salario;
-
-	@OneToMany(mappedBy = "garcom")
 	private Set<Comanda> comandaDoGarcom = new TreeSet();
-
-	@ManyToMany
-	@JoinTable(name = "tb_permissao_usuario", joinColumns = @JoinColumn(name = "garcom.id"), inverseJoinColumns = @JoinColumn(name = "role.id"))
 	private List<Role> permissoes = new ArrayList<>();
 
-	public Funcionario(Long id, String nome, String username, String password, String cpf, LocalDateTime horarioEntrada,
+	public FuncionarioDTO(Long id, String nome, String username, String password, String cpf,
 			LocalDateTime horarioSaida, Duration horasTrabalhadas, BigDecimal salario, Set<Comanda> comandaDoGarcom,
 			List<Role> permissoes) {
-		super(id, nome, username, password, cpf);
-		this.horarioEntrada = horarioEntrada;
+		this.id = id;
+		this.nome = nome;
+		this.username = username;
+		this.password = password;
+		this.cpf = cpf;
 		this.horarioSaida = horarioSaida;
 		this.horasTrabalhadas = horasTrabalhadas;
 		this.salario = salario;
@@ -59,8 +51,8 @@ public class Funcionario extends Usuario {
 		this.permissoes = permissoes;
 	}
 
-	public Funcionario() {
-		super();
+	public FuncionarioDTO() {
+
 	}
 
 	public Long getId() {
@@ -71,12 +63,36 @@ public class Funcionario extends Usuario {
 		this.id = id;
 	}
 
-	public LocalDateTime getHorarioEntrada() {
-		return horarioEntrada;
+	public String getNome() {
+		return nome;
 	}
 
-	public void setHorarioEntrada(LocalDateTime horarioEntrada) {
-		this.horarioEntrada = horarioEntrada;
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getCpf() {
+		return cpf;
+	}
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
 	}
 
 	public LocalDateTime getHorarioSaida() {
@@ -107,24 +123,16 @@ public class Funcionario extends Usuario {
 		return comandaDoGarcom;
 	}
 
+	public void setComandaDoGarcom(Set<Comanda> comandaDoGarcom) {
+		this.comandaDoGarcom = comandaDoGarcom;
+	}
+
 	public List<Role> getPermissoes() {
 		return permissoes;
 	}
 
 	public void setPermissoes(List<Role> permissoes) {
 		this.permissoes = permissoes;
-	}
-
-	public Long calcularHorasTrabalhadas(LocalDateTime horarioEntrada, LocalDateTime horarioSaida) {
-		Duration calculoPorHora = Duration.between(horarioEntrada, horarioSaida);
-		this.horasTrabalhadas = calculoPorHora;
-		return calculoPorHora.toHours();
-
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(id);
 	}
 
 	@Override
@@ -135,14 +143,18 @@ public class Funcionario extends Usuario {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Funcionario other = (Funcionario) obj;
-		return Objects.equals(id, other.id);
+		FuncionarioDTO other = (FuncionarioDTO) obj;
+		return Objects.equals(cpf, other.cpf) && Objects.equals(id, other.id) && Objects.equals(nome, other.nome)
+				&& Objects.equals(password, other.password) && Objects.equals(username, other.username);
 	}
 
 	@Override
 	public String toString() {
-		return "Garcom [id=" + id + ", horarioEntrada=" + horarioEntrada + ", horarioSaida=" + horarioSaida
-				+ ", horasTrabalhadas=" + horasTrabalhadas + ", salario=" + salario + "]";
+		return "FuncionarioDTO [id=" + id + ", nome=" + nome + ", username=" + username + ", password=" + password
+				+ ", cpf=" + cpf + ", horarioSaida=" + horarioSaida + ", horasTrabalhadas=" + horasTrabalhadas
+				+ ", salario=" + salario + ", comandaDoGarcom=" + comandaDoGarcom + ", permissoes=" + permissoes + "]";
 	}
 
+	
+	
 }
