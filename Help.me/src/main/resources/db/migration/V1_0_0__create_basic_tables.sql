@@ -14,17 +14,12 @@ CREATE TABLE tb_comandas (
 );
 
 CREATE TABLE tb_funcionario (
- 	id BIGINT NOT NULL AUTO_INCREMENT,
-    nome VARCHAR(255),
-    username VARCHAR(255),
-    password VARCHAR(255),
-    cpf VARCHAR(255),
+    id BIGINT NOT NULL AUTO_INCREMENT,    
     horario_entrada_dia DATETIME,
     horario_saida_dia DATETIME,
     total_horas_trabalhadas_mes DECIMAL(21,0),
     salario_funcionario DECIMAL(38,2),
-    PRIMARY KEY (id),
-    FOREIGN KEY (id) REFERENCES tb_usuarios (id)
+    PRIMARY KEY (id)
 );
 
 CREATE TABLE tb_mesa (
