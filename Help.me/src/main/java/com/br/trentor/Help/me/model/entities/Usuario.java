@@ -10,11 +10,13 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
+import jakarta.persistence.MappedSuperclass;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "tb_usuarios")
 @Inheritance(strategy = InheritanceType.JOINED)
+@MappedSuperclass
 public class Usuario implements Serializable{
     private static final long serialVersionUID = 1L;
 

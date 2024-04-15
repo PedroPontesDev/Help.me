@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.br.trentor.Help.me.model.entities.Funcionario;
 
 @Repository
-public interface GarcomRepositories extends JpaRepository<Funcionario, Long> {
+public interface FuncionarioRepositories extends JpaRepository<Funcionario, Long> {
 
 }
