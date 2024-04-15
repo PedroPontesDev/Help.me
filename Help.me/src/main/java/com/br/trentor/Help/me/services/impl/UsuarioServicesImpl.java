@@ -1,5 +1,8 @@
 package com.br.trentor.Help.me.services.impl;
 
+import java.util.List;
+import java.util.function.Supplier;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -45,8 +48,25 @@ public class UsuarioServicesImpl implements UsuarioServices {
 		} 
 		var dto = MyMaper.parseObject(entidade.get(), UsuarioDTO.class);
 		return dto;
-		
+	}
+
+	@Override
+	public UsuarioDTO findById(Long id) throws Exception {
+		var entidade = funcionarioRepository.findById(id)
+					.orElseThrow(() -> new Exception("Não foi possivel localizar usuario por ID " + id  + ", tente novamente!"));
+		if(entidade != null) {
+			var dto = MyMaper.parseObject(entidade, UsuarioDTO.class);
+			return dto;
+		} throw new Exception("Usuario não encontrando");
 		
 	}
 
+	@Override
+	public List<UsuarioDTO> findAll() {
+		List<Usuario> todosUsuarios = userRepository.findAll();
+		return MyMaper.parseListObjects(todosUsuarios, UsuarioDTO.class);
+	}
+
+	
+	
 }
