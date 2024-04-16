@@ -10,4 +10,6 @@ public interface UsuarioServices {
 	UsuarioDTO atualizarUsuarioExistente(UsuarioDTO usuarioExistente) throws Exception;
 	UsuarioDTO findById(Long id) throws Exception;
 	List<UsuarioDTO> findAll();
+	void deletarUsuario(Long id);
+
 }

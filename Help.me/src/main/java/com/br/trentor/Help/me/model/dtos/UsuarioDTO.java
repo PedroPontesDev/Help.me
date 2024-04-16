@@ -1,53 +1,50 @@
-package com.br.trentor.Help.me.model.entities;
+package com.br.trentor.Help.me.model.dtos;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
+import java.util.Set;
+import java.util.TreeSet;
+
+import org.springframework.hateoas.RepresentationModel;
+
+import com.br.trentor.Help.me.model.entities.Comanda;
+import com.br.trentor.Help.me.model.entities.Role;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.MappedSuperclass;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 
-@MappedSuperclass
-public abstract class Usuario implements Serializable {
+@JsonPropertyOrder(value = "id, username, passsword, cpf, nome")
+public abstract class UsuarioDTO extends RepresentationModel<UsuarioDTO> implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-
-	@Column(name = "nome")
 	private String nome;
-
-	@Column(name = "username", unique = true, nullable = false)
 	private String username;
-
-	@Column(name = "password", nullable = false)
 	private String password;
-
-	@Column(name = "cpf", unique = true, nullable = false)
 	private String cpf;
 
-	@OneToOne
-	@JoinColumn(name = "permissao_id")
-	Role permissao;
+	private Role permissao;
 
-	public Usuario(Long id, String nome, String username, String password, String cpf, Role permissao) {
-		super();
+	public UsuarioDTO(Long id, String nome, String username, String password, String cpf, Role permissao) {
 		this.id = id;
 		this.nome = nome;
 		this.username = username;
 		this.password = password;
 		this.cpf = cpf;
 		this.permissao = permissao;
-
 	}
 
-	public Usuario() {
-		// TODO Auto-generated constructor stub
+	public UsuarioDTO() {
+
 	}
 
 	public Long getId() {
@@ -90,11 +87,6 @@ public abstract class Usuario implements Serializable {
 		this.cpf = cpf;
 	}
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(id, username);
-	}
-
 	public Role getPermissao() {
 		return permissao;
 	}
@@ -111,16 +103,17 @@ public abstract class Usuario implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Usuario other = (Usuario) obj;
-		return Objects.equals(id, other.id) && Objects.equals(username, other.username);
+		UsuarioDTO other = (UsuarioDTO) obj;
+		return Objects.equals(cpf, other.cpf) && Objects.equals(id, other.id) && Objects.equals(nome, other.nome)
+				&& Objects.equals(password, other.password) && Objects.equals(username, other.username);
 	}
 
 	@Override
 	public String toString() {
-		return "Usuario [id=" + id + ", nome=" + nome + ", username=" + username + ", password=" + password + ", cpf="
-				+ cpf + ", permissao=" + permissao + "]";
+		return "UsuarioDTO [id=" + id + ", nome=" + nome + ", username=" + username + ", password=" + password
+				+ ", cpf=" + cpf + ", permissao=" + permissao + "]";
 	}
-
+	
 	
 
 }

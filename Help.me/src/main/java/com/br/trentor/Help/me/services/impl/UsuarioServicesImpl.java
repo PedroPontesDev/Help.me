@@ -8,7 +8,9 @@ import org.springframework.stereotype.Service;
 
 import com.br.trentor.Help.me.model.dtos.UsuarioDTO;
 import com.br.trentor.Help.me.model.entities.Funcionario;
+import com.br.trentor.Help.me.model.entities.Role;
 import com.br.trentor.Help.me.model.entities.Usuario;
+import com.br.trentor.Help.me.model.entities.security.enumerated.TipoUsuario;
 import com.br.trentor.Help.me.model.mapper.MyMaper;
 import com.br.trentor.Help.me.repositories.FuncionarioRepositories;
 import com.br.trentor.Help.me.repositories.UsuarioRepositories;
@@ -22,11 +24,13 @@ public class UsuarioServicesImpl implements UsuarioServices {
 	
 	@Autowired
 	FuncionarioRepositories funcionarioRepository;
+	
 
 	@Override
 	public UsuarioDTO criarNovoUsuario(UsuarioDTO newUser) throws Exception {
 		Usuario usuario = MyMaper.parseObject(newUser, Usuario.class);
 		if (usuario == null) throw new Exception("Dados do usuario não pôde ser confirmado, confira os dados e tente novamente!");
+		usuario.getPermissao().setTipoDeUsuario(TipoUsuario.COMUM);
 		usuario = userRepository.save(usuario);
 		return MyMaper.parseObject(usuario, UsuarioDTO.class);
 	}
@@ -35,15 +39,17 @@ public class UsuarioServicesImpl implements UsuarioServices {
 	public UsuarioDTO atualizarUsuarioExistente(UsuarioDTO usuarioExistente) throws Exception {
 		if(usuarioExistente == null) throw new Exception("Dados do usuario não pôde ser confirmado, confira os dados e tente novomanete!");
 		var entidade = userRepository.findById(usuarioExistente.getId());
-		if(entidade.isPresent()) {
+		if(entidade.isPresent() && entidade.get().getPermissao().getTipoDeUsuario() == TipoUsuario.ADMINISTRADOR){
 			Usuario user = entidade.get();
 			user.setCpf(usuarioExistente.getCpf());
 			user.setNome(usuarioExistente.getNome());
 			user.setPassword(usuarioExistente.getPassword());
 			user.setUsername(usuarioExistente.getUsername());
 			user = userRepository.save(user);
-			
-		} 
+		} else {
+			throw new Exception("Usuario não é administrador ou estpa unulo, verifique e tente novamente!");
+		}
+		
 		var dto = MyMaper.parseObject(entidade.get(), UsuarioDTO.class);
 		return dto;
 	}
