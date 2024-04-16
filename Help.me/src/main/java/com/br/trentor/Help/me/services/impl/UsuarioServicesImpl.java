@@ -71,6 +71,12 @@ public class UsuarioServicesImpl implements UsuarioServices {
 		return MyMaper.parseListObjects(todosUsuarios, UsuarioDTO.class);
 	}
 
+	@Override
+	public void deletarUsuario(Long id) {
+		// TODO Auto-generated method stub
+		
+	}
+
 	
 	
 }

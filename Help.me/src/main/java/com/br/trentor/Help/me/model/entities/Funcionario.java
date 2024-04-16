@@ -39,7 +39,7 @@ public class Funcionario extends Usuario {
 	@OneToMany(mappedBy = "garcom")
 	private Set<Comanda> comandaDoGarcom = new TreeSet();
 
-	@OneToOne
+	@OneToOne(mappedBy = "permissaoUsuario")
 	Role permisssão;
 
 	public Funcionario(Long id, String nome, String username, String password, String cpf, LocalDateTime horarioEntrada,
