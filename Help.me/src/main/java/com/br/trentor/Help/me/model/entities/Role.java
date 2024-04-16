@@ -26,7 +26,7 @@ public class Role implements Serializable{
 	@Enumerated(EnumType.STRING)
 	private TipoUsuario tipoDeUsuario;
 	
-	@OneToOne(mappedBy = "permissao")
+	
 	private Usuario permissaoUsuario;
 
 	public Role(Long id, TipoUsuario tipoDeUsuario, Usuario permissaoUsuario) {

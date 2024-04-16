@@ -19,131 +19,69 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "tb_funcionario")
 public class Funcionario extends Usuario {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	@Column(name = "horario_entrada_dia")
-	private LocalDateTime horarioEntrada;
+    @Column(name = "horario_entrada_dia")
+    private LocalDateTime horarioEntrada;
 
-	@Column(name = "horario_saida_dia")
-	private LocalDateTime horarioSaida;
+    @Column(name = "horario_saida_dia")
+    private LocalDateTime horarioSaida;
 
-	@Column(name = "total_horas_trabalhadas_mes")
-	private Duration horasTrabalhadas;
-	@Column(name = "salario_funcionario")
-	private BigDecimal salario;
+    @Column(name = "total_horas_trabalhadas_mes")
+    private Duration horasTrabalhadas;
+    
+    @Column(name = "salario_funcionario")
+    private BigDecimal salario;
 
-	@OneToMany(mappedBy = "garcom")
-	private Set<Comanda> comandaDoGarcom = new TreeSet();
+    @OneToMany(mappedBy = "garcom")
+    private Set<Comanda> comandaDoGarcom = new TreeSet<>();
 
-	@OneToOne(mappedBy = "permissaoUsuario")
-	Role permisssão;
+    @OneToOne
+    Role permissao;
 
-	public Funcionario(Long id, String nome, String username, String password, String cpf, LocalDateTime horarioEntrada,
-			LocalDateTime horarioSaida, Duration horasTrabalhadas, BigDecimal salario, Set<Comanda> comandaDoGarcom,
-			Role permissão) {
-		super(id, nome, username, password, cpf, permissão);
-		this.horarioEntrada = horarioEntrada;
-		this.horarioSaida = horarioSaida;
-		this.horasTrabalhadas = horasTrabalhadas;
-		this.salario = salario;
-		this.comandaDoGarcom = comandaDoGarcom;
-		this.permisssão = permissão;
-	}
+    public Funcionario(Long id, String nome, String username, String password, String cpf, LocalDateTime horarioEntrada,
+            LocalDateTime horarioSaida, Duration horasTrabalhadas, BigDecimal salario, Set<Comanda> comandaDoGarcom,
+            Role permissao) {
+        super(id, nome, username, password, cpf, permissao);
+        this.horarioEntrada = horarioEntrada;
+        this.horarioSaida = horarioSaida;
+        this.horasTrabalhadas = horasTrabalhadas;
+        this.salario = salario;
+        this.comandaDoGarcom = comandaDoGarcom;
+        this.permissao = permissao;
+    }
 
-	public Funcionario() {
-		super();
-	}
+    public Funcionario() {
+        super();
+    }
 
-	public Long getId() {
-		return id;
-	}
+    // Getters e setters
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 
-	public LocalDateTime getHorarioEntrada() {
-		return horarioEntrada;
-	}
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Funcionario other = (Funcionario) obj;
+        return Objects.equals(id, other.id);
+    }
 
-	public void setHorarioEntrada(LocalDateTime horarioEntrada) {
-		this.horarioEntrada = horarioEntrada;
-	}
-
-	public LocalDateTime getHorarioSaida() {
-		return horarioSaida;
-	}
-
-	public void setHorarioSaida(LocalDateTime horarioSaida) {
-		this.horarioSaida = horarioSaida;
-	}
-
-	public Duration getHorasTrabalhadas() {
-		return horasTrabalhadas;
-	}
-
-	public void setHorasTrabalhadas(Duration horasTrabalhadas) {
-		this.horasTrabalhadas = horasTrabalhadas;
-	}
-
-	public BigDecimal getSalario() {
-		return salario;
-	}
-
-	public void setSalario(BigDecimal salario) {
-		this.salario = salario;
-	}
-
-	public Set<Comanda> getComandaDoGarcom() {
-		return comandaDoGarcom;
-	}
-
-	public Role getPermisssão() {
-		return permisssão;
-	}
-
-	public void setPermisssão(Role permisssão) {
-		this.permisssão = permisssão;
-	}
-
-	public void setComandaDoGarcom(Set<Comanda> comandaDoGarcom) {
-		this.comandaDoGarcom = comandaDoGarcom;
-	}
-
-	public Long calcularHorasTrabalhadas(LocalDateTime horarioEntrada, LocalDateTime horarioSaida) {
-		Duration calculoPorHora = Duration.between(horarioEntrada, horarioSaida);
-		this.horasTrabalhadas = calculoPorHora;
-		return calculoPorHora.toHours();
-
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(id);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Funcionario other = (Funcionario) obj;
-		return Objects.equals(id, other.id);
-	}
-
-	@Override
-	public String toString() {
-		return "Funcionario [id=" + id + ", horarioEntrada=" + horarioEntrada + ", horarioSaida=" + horarioSaida
-				+ ", horasTrabalhadas=" + horasTrabalhadas + ", salario=" + salario + ", comandaDoGarcom="
-				+ comandaDoGarcom + ", permisssão=" + permisssão + "]";
-	}
-
-	
+    @Override
+    public String toString() {
+        return "Funcionario [id=" + id + ", horarioEntrada=" + horarioEntrada + ", horarioSaida=" + horarioSaida
+                + ", horasTrabalhadas=" + horasTrabalhadas + ", salario=" + salario + ", comandaDoGarcom="
+                + comandaDoGarcom + ", permissao=" + permissao + "]";
+    }
 }

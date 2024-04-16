@@ -5,8 +5,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.br.trentor.Help.me.model.dtos.ComandaDTO;
 import com.br.trentor.Help.me.model.dtos.FuncionarioDTO;
-import com.br.trentor.Help.me.services.impl.UsuarioServicesImpl;
+import com.br.trentor.Help.me.services.impl.ComandaServiceImpl;
+import com.br.trentor.Help.me.services.impl.FuncionarioServicesImpl;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -17,10 +19,10 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 public class FuncionarioController {
 
 	@Autowired
-	private UsuarioServicesImpl usuarioService;
+	private ComandaServiceImpl comandaSerivces;
 	
-	@Operation(summary = "Cria um usuario no banco")
-	public ResponseEntity<FuncionarioDTO> criarUsuario(FuncionarioDTO novoUsuario) {
+	@Operation(summary = "Abrir nova comanda")
+	public ResponseEntity<ComandaDTO> abrirNovaComanda(Long garcomId, ComandaDTO novaComanda) {
 		return null;
 	}
 	

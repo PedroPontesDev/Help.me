@@ -1,5 +1,6 @@
 package com.br.trentor.Help.me.model.entities;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -24,24 +25,27 @@ public class Mesa {
 
 	@OneToOne
 	private Comanda comanda;
-	
+
 	@Enumerated(EnumType.STRING)
 	private StatusDaMesa status;
-	
+
 	private LocalDateTime inicioOcupacao;
 	private LocalDateTime desocupacao;
-	
-	public Mesa(Long id, Comanda comanda, StatusDaMesa status, LocalDateTime inicioOcupacao,
-			LocalDateTime desocupacao) {
+
+	private Integer[] numeroOcupantes;
+
+	public Mesa(Long id, Comanda comanda, StatusDaMesa status, LocalDateTime inicioOcupacao, LocalDateTime desocupacao,
+			Integer[] numeroOcupantes) {
 		this.id = id;
 		this.comanda = comanda;
 		this.status = status;
 		this.inicioOcupacao = inicioOcupacao;
 		this.desocupacao = desocupacao;
+		this.numeroOcupantes = numeroOcupantes;
 	}
-	
+
 	public Mesa() {
-		
+
 	}
 
 	public Long getId() {
@@ -83,9 +87,17 @@ public class Mesa {
 	public void setDesocupacao(LocalDateTime desocupacao) {
 		this.desocupacao = desocupacao;
 	}
-	
-	public Long calcularTempoDeMesaAbera() {
-		return id;
+
+	public Long calcularTempoDeMesaAberTa(LocalDateTime inicio, LocalDateTime fim) {
+		return Duration.between(inicio, fim).toHours();
+	}
+
+	public Integer[] getNumeroOcupantes() {
+		return numeroOcupantes;
+	}
+
+	public void setNumeroOcupantes(Integer[] numeroOcupantes) {
+		this.numeroOcupantes = numeroOcupantes;
 	}
 
 	@Override
@@ -110,8 +122,5 @@ public class Mesa {
 		return "Mesa [id=" + id + ", comanda=" + comanda + ", status=" + status + ", inicioOcupacao=" + inicioOcupacao
 				+ ", desocupacao=" + desocupacao + "]";
 	}
-	
-	
-	
-	
+
 }
