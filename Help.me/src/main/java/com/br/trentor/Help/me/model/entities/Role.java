@@ -11,6 +11,7 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -24,10 +25,14 @@ public class Role implements Serializable{
 
 	@Enumerated(EnumType.STRING)
 	private TipoUsuario tipoDeUsuario;
+	
+	@OneToOne(mappedBy = "permissao")
+	private Usuario permissaoUsuario;
 
-	public Role(Long id, TipoUsuario tipoDeUsuario) {
+	public Role(Long id, TipoUsuario tipoDeUsuario, Usuario permissaoUsuario) {
 		this.id = id;
 		this.tipoDeUsuario = tipoDeUsuario;
+		this.permissaoUsuario = permissaoUsuario;
 	}
 
 	public Role() {

@@ -3,8 +3,6 @@ package com.br.trentor.Help.me.model.entities;
 import java.math.BigDecimal;
 import java.time.Duration;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.TreeSet;
@@ -14,10 +12,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -43,20 +39,19 @@ public class Funcionario extends Usuario {
 	@OneToMany(mappedBy = "garcom")
 	private Set<Comanda> comandaDoGarcom = new TreeSet();
 
-	@ManyToMany
-	@JoinTable(name = "tb_permissao_usuario", joinColumns = @JoinColumn(name = "garcom.id"), inverseJoinColumns = @JoinColumn(name = "role.id"))
-	private List<Role> permissoes = new ArrayList<>();
+	@OneToOne
+	Role permisssão;
 
 	public Funcionario(Long id, String nome, String username, String password, String cpf, LocalDateTime horarioEntrada,
 			LocalDateTime horarioSaida, Duration horasTrabalhadas, BigDecimal salario, Set<Comanda> comandaDoGarcom,
-			List<Role> permissoes) {
-		super(id, nome, username, password, cpf);
+			Role permissão) {
+		super(id, nome, username, password, cpf, permissão);
 		this.horarioEntrada = horarioEntrada;
 		this.horarioSaida = horarioSaida;
 		this.horasTrabalhadas = horasTrabalhadas;
 		this.salario = salario;
 		this.comandaDoGarcom = comandaDoGarcom;
-		this.permissoes = permissoes;
+		this.permisssão = permissão;
 	}
 
 	public Funcionario() {
@@ -107,12 +102,16 @@ public class Funcionario extends Usuario {
 		return comandaDoGarcom;
 	}
 
-	public List<Role> getPermissoes() {
-		return permissoes;
+	public Role getPermisssão() {
+		return permisssão;
 	}
 
-	public void setPermissoes(List<Role> permissoes) {
-		this.permissoes = permissoes;
+	public void setPermisssão(Role permisssão) {
+		this.permisssão = permisssão;
+	}
+
+	public void setComandaDoGarcom(Set<Comanda> comandaDoGarcom) {
+		this.comandaDoGarcom = comandaDoGarcom;
 	}
 
 	public Long calcularHorasTrabalhadas(LocalDateTime horarioEntrada, LocalDateTime horarioSaida) {
@@ -141,8 +140,10 @@ public class Funcionario extends Usuario {
 
 	@Override
 	public String toString() {
-		return "Garcom [id=" + id + ", horarioEntrada=" + horarioEntrada + ", horarioSaida=" + horarioSaida
-				+ ", horasTrabalhadas=" + horasTrabalhadas + ", salario=" + salario + "]";
+		return "Funcionario [id=" + id + ", horarioEntrada=" + horarioEntrada + ", horarioSaida=" + horarioSaida
+				+ ", horasTrabalhadas=" + horasTrabalhadas + ", salario=" + salario + ", comandaDoGarcom="
+				+ comandaDoGarcom + ", permisssão=" + permisssão + "]";
 	}
 
+	
 }

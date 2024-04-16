@@ -4,42 +4,44 @@ import java.io.Serializable;
 import java.util.Objects;
 
 import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Inheritance;
-import jakarta.persistence.InheritanceType;
 import jakarta.persistence.MappedSuperclass;
-import jakarta.persistence.Table;
+import jakarta.persistence.OneToOne;
 
 @MappedSuperclass
-public class Usuario implements Serializable{
-    private static final long serialVersionUID = 1L;
+public abstract class Usuario implements Serializable {
+	private static final long serialVersionUID = 1L;
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    @Column(name = "nome")
-    private String nome;
+	@Column(name = "nome")
+	private String nome;
 
-    @Column(name = "username", unique = true, nullable = false)
-    private String username;
+	@Column(name = "username", unique = true, nullable = false)
+	private String username;
 
-    @Column(name = "password", nullable = false)
-    private String password;
+	@Column(name = "password", nullable = false)
+	private String password;
 
-    @Column(name = "cpf", unique = true, nullable = false)
-    private String cpf;
- 
-	public Usuario(Long id, String nome, String username, String password, String cpf) {
+	@Column(name = "cpf", unique = true, nullable = false)
+	private String cpf;
+
+	@OneToOne
+	Role permissao;
+
+	public Usuario(Long id, String nome, String username, String password, String cpf, Role permissao) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.username = username;
 		this.password = password;
 		this.cpf = cpf;
+		this.permissao = permissao;
+
 	}
 
 	public Usuario() {
@@ -91,6 +93,14 @@ public class Usuario implements Serializable{
 		return Objects.hash(id, username);
 	}
 
+	public Role getPermissao() {
+		return permissao;
+	}
+
+	public void setPermissao(Role permissao) {
+		this.permissao = permissao;
+	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -106,9 +116,9 @@ public class Usuario implements Serializable{
 	@Override
 	public String toString() {
 		return "Usuario [id=" + id + ", nome=" + nome + ", username=" + username + ", password=" + password + ", cpf="
-				+ cpf + "]";
+				+ cpf + ", permissao=" + permissao + "]";
 	}
-    
-    
+
+	
 
 }

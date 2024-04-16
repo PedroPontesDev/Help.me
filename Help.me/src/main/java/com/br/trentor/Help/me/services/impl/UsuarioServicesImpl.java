@@ -28,8 +28,6 @@ public class UsuarioServicesImpl implements UsuarioServices {
 		Usuario usuario = MyMaper.parseObject(newUser, Usuario.class);
 		if (usuario == null) throw new Exception("Dados do usuario não pôde ser confirmado, confira os dados e tente novamente!");
 		usuario = userRepository.save(usuario);
-		Funcionario newFuncUser = new Funcionario(newUser.getId(), newUser.getNome(), newUser.getUsername(), newUser.getPassword(), newUser.getCpf(), null, null, null, null, null, null);
-		newFuncUser = funcionarioRepository.save(newFuncUser);
 		return MyMaper.parseObject(usuario, UsuarioDTO.class);
 	}
 
