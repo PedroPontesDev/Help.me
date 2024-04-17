@@ -17,8 +17,8 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "tb_funcionario")
-public class Funcionario extends Usuario {
+@Table(name = "tb_garcom")
+public class Garcom extends Usuario {
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -43,7 +43,7 @@ public class Funcionario extends Usuario {
     @OneToOne
     Role permissao;
 
-    public Funcionario(Long id, String nome, String username, String password, String cpf, LocalDateTime horarioEntrada,
+    public Garcom(Long id, String nome, String username, String password, String cpf, LocalDateTime horarioEntrada,
             LocalDateTime horarioSaida, Duration horasTrabalhadas, BigDecimal salario, Set<Comanda> comandaDoGarcom,
             Role permissao) {
         super(id, nome, username, password, cpf, permissao);
@@ -55,7 +55,7 @@ public class Funcionario extends Usuario {
         this.permissao = permissao;
     }
 
-    public Funcionario() {
+    public Garcom() {
         super();
     }
 
@@ -74,7 +74,7 @@ public class Funcionario extends Usuario {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        Funcionario other = (Funcionario) obj;
+        Garcom other = (Garcom) obj;
         return Objects.equals(id, other.id);
     }
 

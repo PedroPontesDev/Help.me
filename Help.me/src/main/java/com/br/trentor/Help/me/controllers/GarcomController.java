@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.br.trentor.Help.me.model.dtos.ComandaDTO;
-import com.br.trentor.Help.me.model.dtos.FuncionarioDTO;
+import com.br.trentor.Help.me.model.dtos.GarcomDTO;
 import com.br.trentor.Help.me.services.impl.ComandaServiceImpl;
 import com.br.trentor.Help.me.services.impl.FuncionarioServicesImpl;
 
@@ -16,7 +16,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 @RestController
 @RequestMapping("/usuario/v1/")
 @Tag(name = "Usuario")
-public class FuncionarioController {
+public class GarcomController {
 
 	@Autowired
 	private ComandaServiceImpl comandaSerivces;

@@ -16,7 +16,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "tb_permissao")
-public class Role implements Serializable{
+public class Role implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -25,8 +25,8 @@ public class Role implements Serializable{
 
 	@Enumerated(EnumType.STRING)
 	private TipoUsuario tipoDeUsuario;
-	
-	
+
+	@OneToOne(mappedBy = "permissao")
 	private Usuario permissaoUsuario;
 
 	public Role(Long id, TipoUsuario tipoDeUsuario, Usuario permissaoUsuario) {
@@ -36,9 +36,9 @@ public class Role implements Serializable{
 	}
 
 	public Role() {
-		
+
 	}
-	
+
 	public Long getId() {
 		return id;
 	}
@@ -53,6 +53,14 @@ public class Role implements Serializable{
 
 	public void setTipoDeUsuario(TipoUsuario tipoDeUsuario) {
 		this.tipoDeUsuario = tipoDeUsuario;
+	}
+
+	public Usuario getPermissaoUsuario() {
+		return permissaoUsuario;
+	}
+
+	public void setPermissaoUsuario(Usuario permissaoUsuario) {
+		this.permissaoUsuario = permissaoUsuario;
 	}
 
 	@Override
@@ -76,9 +84,5 @@ public class Role implements Serializable{
 	public String toString() {
 		return "Role [id=" + id + ", tipoDeUsuario=" + tipoDeUsuario + "]";
 	}
-	
-	
-	
-	
-	
+
 }

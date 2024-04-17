@@ -20,7 +20,7 @@ public class Comanda {
 	private Long id;
 
 	@ManyToOne
-	private Funcionario garcom;
+	private Garcom garcom;
 	
 	@OneToOne(mappedBy = "comanda")
 	private Mesa mesaPertecente;
@@ -28,7 +28,7 @@ public class Comanda {
 	@Column(name = "valor_comanda")
 	private BigDecimal valorTotalComanda;
 
-	public Comanda(Long id, Funcionario garcom, Mesa mesaPertecente, BigDecimal valorTotalComanda) {
+	public Comanda(Long id, Garcom garcom, Mesa mesaPertecente, BigDecimal valorTotalComanda) {
 		this.id = id;
 		this.garcom = garcom;
 		this.mesaPertecente = mesaPertecente;
@@ -47,11 +47,11 @@ public class Comanda {
 		this.id = id;
 	}
 
-	public Funcionario getGarcom() {
+	public Garcom getGarcom() {
 		return garcom;
 	}
 
-	public void setGarcom(Funcionario garcom) {
+	public void setGarcom(Garcom garcom) {
 		this.garcom = garcom;
 	}
 

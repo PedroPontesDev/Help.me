@@ -23,7 +23,7 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 
 @JsonPropertyOrder(value = "id, username, passsword, cpf, nome")
-public class FuncionarioDTO extends RepresentationModel<FuncionarioDTO> implements Serializable {
+public class GarcomDTO extends RepresentationModel<GarcomDTO> implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Long id;
@@ -38,7 +38,7 @@ public class FuncionarioDTO extends RepresentationModel<FuncionarioDTO> implemen
 	private Set<Comanda> comandaDoGarcom = new TreeSet();
 	private List<Role> permissoes = new ArrayList<>();
 
-	public FuncionarioDTO(Long id, String nome, String username, String password, String cpf,
+	public GarcomDTO(Long id, String nome, String username, String password, String cpf,
 			LocalDateTime horarioSaida, Duration horasTrabalhadas, BigDecimal salario, Set<Comanda> comandaDoGarcom,
 			List<Role> permissoes) {
 		this.id = id;
@@ -53,7 +53,7 @@ public class FuncionarioDTO extends RepresentationModel<FuncionarioDTO> implemen
 		this.permissoes = permissoes;
 	}
 
-	public FuncionarioDTO() {
+	public GarcomDTO() {
 
 	}
 
@@ -145,7 +145,7 @@ public class FuncionarioDTO extends RepresentationModel<FuncionarioDTO> implemen
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		FuncionarioDTO other = (FuncionarioDTO) obj;
+		GarcomDTO other = (GarcomDTO) obj;
 		return Objects.equals(cpf, other.cpf) && Objects.equals(id, other.id) && Objects.equals(nome, other.nome)
 				&& Objects.equals(password, other.password) && Objects.equals(username, other.username);
 	}

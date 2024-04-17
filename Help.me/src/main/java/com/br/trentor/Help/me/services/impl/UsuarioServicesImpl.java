@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.br.trentor.Help.me.model.dtos.UsuarioDTO;
-import com.br.trentor.Help.me.model.entities.Funcionario;
+import com.br.trentor.Help.me.model.entities.Garcom;
 import com.br.trentor.Help.me.model.entities.Role;
 import com.br.trentor.Help.me.model.entities.Usuario;
 import com.br.trentor.Help.me.model.entities.security.enumerated.TipoUsuario;
