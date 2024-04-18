@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.br.trentor.Help.me.model.dtos.ComandaDTO;
 import com.br.trentor.Help.me.model.dtos.GarcomDTO;
 import com.br.trentor.Help.me.services.impl.ComandaServiceImpl;
-import com.br.trentor.Help.me.services.impl.FuncionarioServicesImpl;
+import com.br.trentor.Help.me.services.impl.GarcomServicesImpl;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;

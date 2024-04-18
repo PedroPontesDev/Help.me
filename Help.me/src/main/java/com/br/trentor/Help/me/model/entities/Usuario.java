@@ -12,32 +12,22 @@ import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "tb_users")
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public class Usuario implements Serializable {
+public abstract class Usuario implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(name = "nome")
 	private String nome;
 
-	@Column(name = "username", unique = true, nullable = false)
 	private String username;
 
-	@Column(name = "password", nullable = false)
 	private String password;
 
-	@Column(name = "cpf", unique = true, nullable = false)
 	private String cpf;
-
-	@OneToOne
-	@JoinColumn(name = "permissao_id")
 	Role permissao;
 
 	public Usuario(Long id, String nome, String username, String password, String cpf, Role permissao) {

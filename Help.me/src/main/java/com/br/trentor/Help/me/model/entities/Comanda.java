@@ -24,14 +24,18 @@ public class Comanda {
 	
 	@OneToOne(mappedBy = "comanda")
 	private Mesa mesaPertecente;
+	
+	@Column(name = "em_aberto")
+	private boolean estaAberta;
 
 	@Column(name = "valor_comanda")
 	private BigDecimal valorTotalComanda;
 
-	public Comanda(Long id, Garcom garcom, Mesa mesaPertecente, BigDecimal valorTotalComanda) {
+	public Comanda(Long id, Garcom garcom, Mesa mesaPertecente, boolean estaAberta, BigDecimal valorTotalComanda) {
 		this.id = id;
 		this.garcom = garcom;
 		this.mesaPertecente = mesaPertecente;
+		this.estaAberta = estaAberta;
 		this.valorTotalComanda = valorTotalComanda;
 	}
 
@@ -70,11 +74,21 @@ public class Comanda {
 	public void setValorTotalComanda(BigDecimal valorTotalComanda) {
 		this.valorTotalComanda = valorTotalComanda;
 	}
+	
+	public boolean isEstaAberta() {
+		return estaAberta;
+	}
+
+	public void setEstaAberta(boolean estaAberta) {
+		this.estaAberta = estaAberta;
+	}
 
 	@Override
 	public String toString() {
-		return "Comanda [id=" + id + ", garcom=" + garcom + ", mesaPertecente=" + mesaPertecente
-				+ ", valorTotalComanda=" + valorTotalComanda + "]";
+		return "Comanda [id=" + id + ", garcom=" + garcom + ", mesaPertecente=" + mesaPertecente + ", estaAberta="
+				+ estaAberta + ", valorTotalComanda=" + valorTotalComanda + "]";
 	}
+
+	
 
 }
