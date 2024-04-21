@@ -26,13 +26,9 @@ public class Role implements Serializable {
 	@Enumerated(EnumType.STRING)
 	private TipoUsuario tipoDeUsuario;
 
-	@OneToOne
-	private Usuario permissaoUsuario;
-
 	public Role(Long id, TipoUsuario tipoDeUsuario, Usuario permissaoUsuario) {
 		this.id = id;
 		this.tipoDeUsuario = tipoDeUsuario;
-		this.permissaoUsuario = permissaoUsuario;
 	}
 
 	public Role() {
@@ -54,15 +50,7 @@ public class Role implements Serializable {
 	public void setTipoDeUsuario(TipoUsuario tipoDeUsuario) {
 		this.tipoDeUsuario = tipoDeUsuario;
 	}
-
-	public Usuario getPermissaoUsuario() {
-		return permissaoUsuario;
-	}
-
-	public void setPermissaoUsuario(Usuario permissaoUsuario) {
-		this.permissaoUsuario = permissaoUsuario;
-	}
-
+	
 	@Override
 	public int hashCode() {
 		return Objects.hash(id, tipoDeUsuario);
