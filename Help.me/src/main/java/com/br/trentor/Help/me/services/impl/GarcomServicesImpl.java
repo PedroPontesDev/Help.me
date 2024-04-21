@@ -11,7 +11,7 @@ import com.br.trentor.Help.me.services.GarcomServices;
 public class GarcomServicesImpl implements GarcomServices {
 
 	@Override
-	public GarcomDTO registrarNovoGaracom(GarcomDTO novoGarcom) throws Exception {
+	public GarcomDTO registrarNovoGarcom(GarcomDTO novoGarcom) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}
