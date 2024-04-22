@@ -30,7 +30,6 @@ public class GarcomServicesImpl implements GarcomServices {
 	public GarcomDTO registrarNovoGarcom(GarcomDTO novoGarcom) throws Exception {
 	    if(novoGarcom == null)   throw new Exception("Os dados parecem estar nulos, verifique os dados e tente novamente!");
 	    Garcom newGarcom = MyMaper.parseObject(novoGarcom, Garcom.class);
-	    
 	    // Verifica se a permissão está nula ou se já está salva no banco de dados
 	    if(newGarcom.getPermissao() == null || newGarcom.getPermissao().getId() == null ) {
 	        // Cria uma nova permissão para o garçom
