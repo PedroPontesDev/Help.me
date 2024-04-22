@@ -26,19 +26,31 @@ public class GarcomServicesImpl implements GarcomServices {
 	
 	@Override
 	public GarcomDTO registrarNovoGarcom(GarcomDTO novoGarcom) throws Exception {
-		if(novoGarcom == null) throw new Exception("Os dados parecem estar nulos, verifique os dados e tente novamente!");
-		Garcom newGarcom = MyMaper.parseObject(novoGarcom, Garcom.class);
-		if(newGarcom.getPermissao() == null) {
-			Role role = newGarcom.getPermissao();
-			role.setTipoDeUsuario(TipoUsuario.GARACOM);
-			permissaoRepository.save(role);
-			newGarcom.setPermissao(role);
-		}
-		newGarcom = garcomRepository.save(newGarcom);
-		var dto = MyMaper.parseObject(newGarcom, GarcomDTO.class);
-		return dto;
-	
+	    if(novoGarcom == null) {
+	        throw new Exception("Os dados parecem estar nulos, verifique os dados e tente novamente!");
+	    }
+
+	    Garcom newGarcom = MyMaper.parseObject(novoGarcom, Garcom.class);
+
+	    // Verifica se a permissão está nula ou se já está salva no banco de dados
+	    if(newGarcom.getPermissao() == null || newGarcom.getPermissao().getId() == null) {
+	        // Cria uma nova permissão para o garçom
+	        Role role = new Role();
+	        role.setTipoDeUsuario(TipoUsuario.GARCOM);
+	        role = permissaoRepository.save(role);
+	        
+	        // Atribui a permissão ao garçom
+	        newGarcom.setPermissao(role);
+	    }
+
+	    // Salva o garçom no banco de dados
+	    newGarcom = garcomRepository.save(newGarcom);
+
+	    // Converte o garçom salvo de volta para um DTO e o retorna
+	    GarcomDTO dto = MyMaper.parseObject(newGarcom, GarcomDTO.class);
+	    return dto;
 	}
+
 
 	@Override
 	public GarcomDTO atualizarGarcomExistente(GarcomDTO gacomExistente) throws Exception {
