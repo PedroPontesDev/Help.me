@@ -2,18 +2,42 @@ package com.br.trentor.Help.me.services.impl;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.Link;
 import org.springframework.stereotype.Service;
 
 import com.br.trentor.Help.me.model.dtos.GarcomDTO;
+import com.br.trentor.Help.me.model.entities.Garcom;
+import com.br.trentor.Help.me.model.entities.Role;
+import com.br.trentor.Help.me.model.entities.security.enumerated.TipoUsuario;
+import com.br.trentor.Help.me.model.mapper.MyMaper;
+import com.br.trentor.Help.me.repositories.GarcomRepositories;
+import com.br.trentor.Help.me.repositories.RoleRepositories;
 import com.br.trentor.Help.me.services.GarcomServices;
 
 @Service
 public class GarcomServicesImpl implements GarcomServices {
 
+	@Autowired
+	GarcomRepositories garcomRepository;
+	
+	@Autowired
+	RoleRepositories permissaoRepository;
+	
 	@Override
 	public GarcomDTO registrarNovoGarcom(GarcomDTO novoGarcom) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		if(novoGarcom == null) throw new Exception("Os dados parecem estar nulos, verifique os dados e tente novamente!");
+		Garcom newGarcom = MyMaper.parseObject(novoGarcom, Garcom.class);
+		if(newGarcom.getPermissao() == null) {
+			Role role = newGarcom.getPermissao();
+			role.setTipoDeUsuario(TipoUsuario.GARACOM);
+			permissaoRepository.save(role);
+			newGarcom.setPermissao(role);
+		}
+		newGarcom = garcomRepository.save(newGarcom);
+		var dto = MyMaper.parseObject(newGarcom, GarcomDTO.class);
+		return dto;
+	
 	}
 
 	@Override

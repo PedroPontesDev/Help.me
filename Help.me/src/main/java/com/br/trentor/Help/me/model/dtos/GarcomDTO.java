@@ -35,12 +35,13 @@ public class GarcomDTO extends RepresentationModel<GarcomDTO> implements Seriali
 	private LocalDateTime horarioSaida;
 	private Duration horasTrabalhadas;
 	private BigDecimal salario;
+	
 	private Set<Comanda> comandaDoGarcom = new TreeSet();
-	private List<Role> permissoes = new ArrayList<>();
+	
+	private Role permissao = new Role();
 
-	public GarcomDTO(Long id, String nome, String username, String password, String cpf,
-			LocalDateTime horarioSaida, Duration horasTrabalhadas, BigDecimal salario, Set<Comanda> comandaDoGarcom,
-			List<Role> permissoes) {
+	public GarcomDTO(Long id, String nome, String username, String password, String cpf, LocalDateTime horarioSaida,
+			Duration horasTrabalhadas, BigDecimal salario, Set<Comanda> comandaDoGarcom, Role permissao) {
 		this.id = id;
 		this.nome = nome;
 		this.username = username;
@@ -50,7 +51,7 @@ public class GarcomDTO extends RepresentationModel<GarcomDTO> implements Seriali
 		this.horasTrabalhadas = horasTrabalhadas;
 		this.salario = salario;
 		this.comandaDoGarcom = comandaDoGarcom;
-		this.permissoes = permissoes;
+		this.permissao = permissao;
 	}
 
 	public GarcomDTO() {
@@ -129,12 +130,12 @@ public class GarcomDTO extends RepresentationModel<GarcomDTO> implements Seriali
 		this.comandaDoGarcom = comandaDoGarcom;
 	}
 
-	public List<Role> getPermissoes() {
-		return permissoes;
+	public Role getPermissao() {
+		return permissao;
 	}
 
-	public void setPermissoes(List<Role> permissoes) {
-		this.permissoes = permissoes;
+	public void setPermissao(Role permissao) {
+		this.permissao = permissao;
 	}
 
 	@Override
@@ -152,9 +153,9 @@ public class GarcomDTO extends RepresentationModel<GarcomDTO> implements Seriali
 
 	@Override
 	public String toString() {
-		return "FuncionarioDTO [id=" + id + ", nome=" + nome + ", username=" + username + ", password=" + password
-				+ ", cpf=" + cpf + ", horarioSaida=" + horarioSaida + ", horasTrabalhadas=" + horasTrabalhadas
-				+ ", salario=" + salario + ", comandaDoGarcom=" + comandaDoGarcom + ", permissoes=" + permissoes + "]";
+		return "GarcomDTO [id=" + id + ", nome=" + nome + ", username=" + username + ", password=" + password + ", cpf="
+				+ cpf + ", horarioSaida=" + horarioSaida + ", horasTrabalhadas=" + horasTrabalhadas + ", salario="
+				+ salario + ", comandaDoGarcom=" + comandaDoGarcom + ", permissao=" + permissao + "]";
 	}
 
 	
