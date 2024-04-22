@@ -28,7 +28,8 @@ public abstract class Usuario implements Serializable {
 	private String password;
 
 	private String cpf;
-	Role permissao;
+	
+	private Role permissao;
 
 	public Usuario(Long id, String nome, String username, String password, String cpf, Role permissao) {
 		super();

@@ -77,7 +77,13 @@ public class Garcom extends Usuario {
         Garcom other = (Garcom) obj;
         return Objects.equals(id, other.id);
     }
-
+    
+    public Long calcularHorasTrabalhadas(LocalDateTime horarioEntrada, LocalDateTime horarioSaida) {
+    	Duration calculo = Duration.between(horarioEntrada, horarioSaida);
+    	Long horasTrabalhadas = calculo.toHours();
+    	return horasTrabalhadas;
+    }
+    
     @Override
     public String toString() {
         return "Funcionario [id=" + id + ", horarioEntrada=" + horarioEntrada + ", horarioSaida=" + horarioSaida

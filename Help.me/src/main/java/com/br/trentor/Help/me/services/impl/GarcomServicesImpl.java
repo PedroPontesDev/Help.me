@@ -30,13 +30,15 @@ public class GarcomServicesImpl implements GarcomServices {
 	    Garcom newGarcom = MyMaper.parseObject(novoGarcom, Garcom.class);
 	    
 	    // Verifica se a permissão está nula ou se já está salva no banco de dados
-	    if(newGarcom.getPermissao() == null || newGarcom.getPermissao().getId() == null) {
+	    if(newGarcom.getPermissao() == null || newGarcom.getPermissao().getId() == null ) {
 	        // Cria uma nova permissão para o garçom
 	        Role role = new Role();
 	        role.setTipoDeUsuario(TipoUsuario.GARCOM);
 	        role = permissaoRepository.save(role);
 	        // Atribui a permissão ao garçom
 	        newGarcom.setPermissao(role);
+	    } else {
+	    	throw new Exception("O Usuário Já Tem Uma Permissão");
 	    }
 	    newGarcom = garcomRepository.save(newGarcom);
 	    

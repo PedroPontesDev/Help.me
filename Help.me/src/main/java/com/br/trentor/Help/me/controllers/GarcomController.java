@@ -12,6 +12,7 @@ import com.br.trentor.Help.me.services.impl.ComandaServiceImpl;
 import com.br.trentor.Help.me.services.impl.GarcomServicesImpl;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
@@ -26,8 +27,8 @@ public class GarcomController {
 	private GarcomServicesImpl garcomServices;
 	
 	@Operation(summary = "Registrar novo garçom ao banco de dados", description = "Method is gonna be implemented authorization, everthing is beeing builded")
-	@PostMapping(path = "/")
-	public ResponseEntity<GarcomDTO> registrarNovoGarcom(GarcomDTO novoGarcom) throws Exception {
+	@PostMapping(path = "/registrar-garcom")
+	public ResponseEntity<GarcomDTO> registrarNovoGarcom(@RequestBody GarcomDTO novoGarcom) throws Exception {
 		GarcomDTO register = garcomServices.registrarNovoGarcom(novoGarcom);
 		return new ResponseEntity<>(register, HttpStatus.CREATED);
 	}
