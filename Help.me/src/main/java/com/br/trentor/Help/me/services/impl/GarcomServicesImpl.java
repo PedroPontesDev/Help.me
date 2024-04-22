@@ -3,7 +3,6 @@ package com.br.trentor.Help.me.services.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.hateoas.Link;
 import org.springframework.stereotype.Service;
 
 import com.br.trentor.Help.me.model.dtos.GarcomDTO;
@@ -15,6 +14,8 @@ import com.br.trentor.Help.me.repositories.GarcomRepositories;
 import com.br.trentor.Help.me.repositories.RoleRepositories;
 import com.br.trentor.Help.me.services.GarcomServices;
 
+import jakarta.transaction.Transactional;
+
 @Service
 public class GarcomServicesImpl implements GarcomServices {
 
@@ -25,6 +26,7 @@ public class GarcomServicesImpl implements GarcomServices {
 	RoleRepositories permissaoRepository;
 	
 	@Override
+	@Transactional(rollbackOn = Exception.class)
 	public GarcomDTO registrarNovoGarcom(GarcomDTO novoGarcom) throws Exception {
 	    if(novoGarcom == null)   throw new Exception("Os dados parecem estar nulos, verifique os dados e tente novamente!");
 	    Garcom newGarcom = MyMaper.parseObject(novoGarcom, Garcom.class);
