@@ -33,21 +33,25 @@ public class GarcomDTO extends RepresentationModel<GarcomDTO> implements Seriali
 	private String cpf;
 
 	private LocalDateTime horarioSaida;
+	private LocalDateTime horarioEntrada;
 	private Duration horasTrabalhadas;
 	private BigDecimal salario;
-	
+
 	private Set<Comanda> comandaDoGarcom = new TreeSet();
-	
+
 	private Role permissao = new Role();
 
 	public GarcomDTO(Long id, String nome, String username, String password, String cpf, LocalDateTime horarioSaida,
-			Duration horasTrabalhadas, BigDecimal salario, Set<Comanda> comandaDoGarcom, Role permissao) {
+			LocalDateTime horarioEntrada, Duration horasTrabalhadas, BigDecimal salario, Set<Comanda> comandaDoGarcom,
+			Role permissao) {
+		super();
 		this.id = id;
 		this.nome = nome;
 		this.username = username;
 		this.password = password;
 		this.cpf = cpf;
 		this.horarioSaida = horarioSaida;
+		this.horarioEntrada = horarioEntrada;
 		this.horasTrabalhadas = horasTrabalhadas;
 		this.salario = salario;
 		this.comandaDoGarcom = comandaDoGarcom;
@@ -106,6 +110,14 @@ public class GarcomDTO extends RepresentationModel<GarcomDTO> implements Seriali
 		this.horarioSaida = horarioSaida;
 	}
 
+	public LocalDateTime getHorarioEntrada() {
+		return horarioEntrada;
+	}
+
+	public void setHorarioEntrada(LocalDateTime horarioEntrada) {
+		this.horarioEntrada = horarioEntrada;
+	}
+
 	public Duration getHorasTrabalhadas() {
 		return horasTrabalhadas;
 	}
@@ -158,6 +170,4 @@ public class GarcomDTO extends RepresentationModel<GarcomDTO> implements Seriali
 				+ salario + ", comandaDoGarcom=" + comandaDoGarcom + ", permissao=" + permissao + "]";
 	}
 
-	
-	
 }
