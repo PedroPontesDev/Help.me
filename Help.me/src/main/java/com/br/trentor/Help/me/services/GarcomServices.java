@@ -11,5 +11,7 @@ public interface GarcomServices {
 	GarcomDTO findById(Long id) throws Exception;
 	List<GarcomDTO> listarTodosGarcom();
 	void deletarUsuario(Long id);
+	
+	
 
 }
