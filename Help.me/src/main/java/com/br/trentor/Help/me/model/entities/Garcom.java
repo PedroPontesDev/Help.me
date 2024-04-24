@@ -12,6 +12,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
@@ -41,6 +42,7 @@ public class Garcom extends Usuario {
     private Set<Comanda> comandaDoGarcom = new TreeSet<>();
 
     @OneToOne
+    @JoinColumn(name = "tb_permissao")
     Role permissao;
 
     public Garcom(Long id, String nome, String username, String password, String cpf, LocalDateTime horarioEntrada,

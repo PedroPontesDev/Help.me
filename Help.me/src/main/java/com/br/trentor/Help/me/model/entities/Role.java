@@ -26,7 +26,7 @@ public class Role implements Serializable {
 	@Enumerated(EnumType.STRING)
 	private TipoUsuario tipoDeUsuario;
 
-	public Role(Long id, TipoUsuario tipoDeUsuario, Usuario permissaoUsuario) {
+	public Role(Long id, TipoUsuario tipoDeUsuario) {
 		this.id = id;
 		this.tipoDeUsuario = tipoDeUsuario;
 	}
