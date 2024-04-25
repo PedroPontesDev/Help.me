@@ -42,10 +42,15 @@ public class GarcomServicesImpl implements GarcomServices {
 
 
 	@Override
-	public GarcomDTO atualizarGarcomExistente(GarcomDTO gacomExistente) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+	public GarcomDTO atualizarGarcomExistente(GarcomDTO garcomExistente) throws Exception {
+		if(garcomExistente == null) throw new IllegalArgumentException("Os dados parecem estar nulos, verifique os dados e tente novamente!");
+		var entityFromDb = garcomRepository.findById(garcomExistente.getId());
+		if(entityFromDb.isPresent()) {
+			Garcom updated = entityFromDb.get();
+		}
+	
 	}
+	
 
 	@Override
 	public GarcomDTO findById(Long id) throws Exception {
