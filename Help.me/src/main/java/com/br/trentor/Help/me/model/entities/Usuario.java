@@ -18,7 +18,7 @@ import jakarta.persistence.OneToOne;
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class Usuario implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -30,8 +30,6 @@ public abstract class Usuario implements Serializable {
 	private String password;
 
 	private String cpf;
-	
-	private Role permissao;
 
 	public Usuario(Long id, String nome, String username, String password, String cpf, Role permissao) {
 		super();
@@ -40,7 +38,6 @@ public abstract class Usuario implements Serializable {
 		this.username = username;
 		this.password = password;
 		this.cpf = cpf;
-		this.permissao = permissao;
 
 	}
 
@@ -93,14 +90,6 @@ public abstract class Usuario implements Serializable {
 		return Objects.hash(id, username);
 	}
 
-	public Role getPermissao() {
-		return permissao;
-	}
-
-	public void setPermissao(Role permissao) {
-		this.permissao = permissao;
-	}
-
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -116,9 +105,7 @@ public abstract class Usuario implements Serializable {
 	@Override
 	public String toString() {
 		return "Usuario [id=" + id + ", nome=" + nome + ", username=" + username + ", password=" + password + ", cpf="
-				+ cpf + ", permissao=" + permissao + "]";
+				+ cpf + "]";
 	}
-
-	
 
 }

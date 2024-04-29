@@ -22,7 +22,7 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 
-@JsonPropertyOrder(value = "id, username, passsword, cpf, nome")
+@JsonPropertyOrder(value = "id, username, passsword, cpf, nome, comandaDoGarcom, horasTrabalhadas, salario")
 public class GarcomDTO extends RepresentationModel<GarcomDTO> implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -31,35 +31,29 @@ public class GarcomDTO extends RepresentationModel<GarcomDTO> implements Seriali
 	private String username;
 	private String password;
 	private String cpf;
-
-	private LocalDateTime horarioSaida;
-	private LocalDateTime horarioEntrada;
-	private Duration horasTrabalhadas;
+	private LocalDateTime horasTrabalhadasSemana;
+	private Duration horasTrabalhadaMes;
 	private BigDecimal salario;
+	private Role role;
 
 	private Set<Comanda> comandaDoGarcom = new TreeSet();
 
-	private Role permissao = new Role();
-
-	public GarcomDTO(Long id, String nome, String username, String password, String cpf, LocalDateTime horarioSaida,
-			LocalDateTime horarioEntrada, Duration horasTrabalhadas, BigDecimal salario, Set<Comanda> comandaDoGarcom,
-			Role permissao) {
-		super();
+	public GarcomDTO(Long id, String nome, String username, String password, String cpf,
+			LocalDateTime horasTrabalhadasSemana, Duration horasTrabalhadaMes, BigDecimal salario, Role role,
+			Set<Comanda> comandaDoGarcom) {
 		this.id = id;
 		this.nome = nome;
 		this.username = username;
 		this.password = password;
 		this.cpf = cpf;
-		this.horarioSaida = horarioSaida;
-		this.horarioEntrada = horarioEntrada;
-		this.horasTrabalhadas = horasTrabalhadas;
+		this.horasTrabalhadasSemana = horasTrabalhadasSemana;
+		this.horasTrabalhadaMes = horasTrabalhadaMes;
 		this.salario = salario;
+		this.role = new Role();
 		this.comandaDoGarcom = comandaDoGarcom;
-		this.permissao = permissao;
 	}
 
 	public GarcomDTO() {
-
 	}
 
 	public Long getId() {
@@ -102,28 +96,20 @@ public class GarcomDTO extends RepresentationModel<GarcomDTO> implements Seriali
 		this.cpf = cpf;
 	}
 
-	public LocalDateTime getHorarioSaida() {
-		return horarioSaida;
+	public LocalDateTime getHorasTrabalhadasSemana() {
+		return horasTrabalhadasSemana;
 	}
 
-	public void setHorarioSaida(LocalDateTime horarioSaida) {
-		this.horarioSaida = horarioSaida;
+	public void setHorasTrabalhadasSemana(LocalDateTime horasTrabalhadasSemana) {
+		this.horasTrabalhadasSemana = horasTrabalhadasSemana;
 	}
 
-	public LocalDateTime getHorarioEntrada() {
-		return horarioEntrada;
+	public Duration getHorasTrabalhadaMes() {
+		return horasTrabalhadaMes;
 	}
 
-	public void setHorarioEntrada(LocalDateTime horarioEntrada) {
-		this.horarioEntrada = horarioEntrada;
-	}
-
-	public Duration getHorasTrabalhadas() {
-		return horasTrabalhadas;
-	}
-
-	public void setHorasTrabalhadas(Duration horasTrabalhadas) {
-		this.horasTrabalhadas = horasTrabalhadas;
+	public void setHorasTrabalhadaMes(Duration horasTrabalhadaMes) {
+		this.horasTrabalhadaMes = horasTrabalhadaMes;
 	}
 
 	public BigDecimal getSalario() {
@@ -134,6 +120,14 @@ public class GarcomDTO extends RepresentationModel<GarcomDTO> implements Seriali
 		this.salario = salario;
 	}
 
+	public Role getRole() {
+		return role;
+	}
+
+	public void setRole(Role role) {
+		this.role = role;
+	}
+
 	public Set<Comanda> getComandaDoGarcom() {
 		return comandaDoGarcom;
 	}
@@ -142,32 +136,40 @@ public class GarcomDTO extends RepresentationModel<GarcomDTO> implements Seriali
 		this.comandaDoGarcom = comandaDoGarcom;
 	}
 
-	public Role getPermissao() {
-		return permissao;
-	}
-
-	public void setPermissao(Role permissao) {
-		this.permissao = permissao;
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + Objects.hash(comandaDoGarcom, cpf, horasTrabalhadaMes, horasTrabalhadasSemana, id,
+				nome, password, role, salario, username);
+		return result;
 	}
 
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
+		if (!super.equals(obj))
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
 		GarcomDTO other = (GarcomDTO) obj;
-		return Objects.equals(cpf, other.cpf) && Objects.equals(id, other.id) && Objects.equals(nome, other.nome)
-				&& Objects.equals(password, other.password) && Objects.equals(username, other.username);
+		return Objects.equals(comandaDoGarcom, other.comandaDoGarcom) && Objects.equals(cpf, other.cpf)
+				&& Objects.equals(horasTrabalhadaMes, other.horasTrabalhadaMes)
+				&& Objects.equals(horasTrabalhadasSemana, other.horasTrabalhadasSemana) && Objects.equals(id, other.id)
+				&& Objects.equals(nome, other.nome) && Objects.equals(password, other.password)
+				&& Objects.equals(role, other.role) && Objects.equals(salario, other.salario)
+				&& Objects.equals(username, other.username);
 	}
 
 	@Override
 	public String toString() {
 		return "GarcomDTO [id=" + id + ", nome=" + nome + ", username=" + username + ", password=" + password + ", cpf="
-				+ cpf + ", horarioSaida=" + horarioSaida + ", horasTrabalhadas=" + horasTrabalhadas + ", salario="
-				+ salario + ", comandaDoGarcom=" + comandaDoGarcom + ", permissao=" + permissao + "]";
+				+ cpf + ", horasTrabalhadasSemana=" + horasTrabalhadasSemana + ", horasTrabalhadaMes="
+				+ horasTrabalhadaMes + ", salario=" + salario + ", role=" + role + ", comandaDoGarcom="
+				+ comandaDoGarcom + "]";
 	}
+	
+	
 
 }

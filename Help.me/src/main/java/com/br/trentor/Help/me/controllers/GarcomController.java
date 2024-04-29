@@ -18,7 +18,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
 @RequestMapping("/garcom/v1/")
-@Tag(name = "Garcoms")
+@Tag(name = "Garçoms")
 public class GarcomController {
 
 	@Autowired

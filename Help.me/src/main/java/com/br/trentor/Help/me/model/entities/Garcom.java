@@ -13,8 +13,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -38,25 +38,72 @@ public class Garcom extends Usuario {
 	@OneToMany(mappedBy = "garcom")
 	private Set<Comanda> comandaDoGarcom = new TreeSet<>();
 
-	@OneToOne
-	private Role permission;
+	@ManyToOne
+	@JoinColumn(name = "role_id")
+	private Role role;
 
 	public Garcom(Long id, String nome, String username, String password, String cpf, Role permissao,
 			LocalDateTime horasTrabalhadasSemana, Duration horasTrabalhadaMes, BigDecimal salario,
-			Set<Comanda> comandaDoGarcom, Role permission) {
-		super(id, nome, username, password, cpf, permission);
+			Set<Comanda> comandaDoGarcom, Role role) {
+		super(id, nome, username, password, cpf, role);
 		this.horasTrabalhadasSemana = horasTrabalhadasSemana;
 		this.horasTrabalhadaMes = horasTrabalhadaMes;
 		this.salario = salario;
 		this.comandaDoGarcom = comandaDoGarcom;
-		this.permission = permission;
+		this.role = role;
 	}
 
 	public Garcom() {
 		super();
 	}
 
-	// Getters e setters
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public LocalDateTime getHorasTrabalhadasSemana() {
+		return horasTrabalhadasSemana;
+	}
+
+	public void setHorasTrabalhadasSemana(LocalDateTime horasTrabalhadasSemana) {
+		this.horasTrabalhadasSemana = horasTrabalhadasSemana;
+	}
+
+	public Duration getHorasTrabalhadaMes() {
+		return horasTrabalhadaMes;
+	}
+
+	public void setHorasTrabalhadaMes(Duration horasTrabalhadaMes) {
+		this.horasTrabalhadaMes = horasTrabalhadaMes;
+	}
+
+	public BigDecimal getSalario() {
+		return salario;
+	}
+
+	public void setSalario(BigDecimal salario) {
+		this.salario = salario;
+	}
+
+	public Set<Comanda> getComandaDoGarcom() {
+		return comandaDoGarcom;
+	}
+
+	public void setComandaDoGarcom(Set<Comanda> comandaDoGarcom) {
+		this.comandaDoGarcom = comandaDoGarcom;
+	}
+
+	public Role getRole() {
+		return role;
+	}
+
+	public void setRole(Role role) {
+		this.role = role;
+	}
 
 	@Override
 	public int hashCode() {
@@ -75,8 +122,8 @@ public class Garcom extends Usuario {
 		return Objects.equals(id, other.id);
 	}
 
-	public Long calcularHorasTrabalhadas(LocalDateTime horarioEntrada, LocalDateTime horarioSaida) {
-		Duration calculo = Duration.between(horarioEntrada, horarioSaida);
+	public Long calcularHorasTrabalhadas(LocalDateTime horarioEntradaDia, LocalDateTime horarioSaidaDia) {
+		Duration calculo = Duration.between(horarioEntradaDia, horarioSaidaDia);
 		Long horasTrabalhadas = calculo.toHours();
 		return horasTrabalhadas;
 	}
@@ -84,10 +131,9 @@ public class Garcom extends Usuario {
 	@Override
 	public String toString() {
 		return "Garcom [id=" + id + ", horasTrabalhadasSemana=" + horasTrabalhadasSemana + ", horasTrabalhadaMes="
-				+ horasTrabalhadaMes + ", salario=" + salario + ", comandaDoGarcom=" + comandaDoGarcom + ", permission="
-				+ permission + "]";
+				+ horasTrabalhadaMes + ", salario=" + salario + ", comandaDoGarcom=" + comandaDoGarcom + ", role="
+				+ role + "]";
 	}
 
-	
 	
 }
