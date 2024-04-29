@@ -6,7 +6,7 @@ spring:
     password: 35828889
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: none
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQL8Dialect
@@ -16,4 +16,4 @@ springdoc:
     - /auth/**
     - /api/**/v1/**
   swagger-ui:
-    use-root-path: true
+    use-root-path: false
