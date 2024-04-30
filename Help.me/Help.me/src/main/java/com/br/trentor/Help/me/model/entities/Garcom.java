@@ -26,9 +26,6 @@ public class Garcom extends Usuario {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(name = "horas_trabalhadas_semana")
-	private LocalDateTime horasTrabalhadasSemana;
-
 	@Column(name = "total_horas_trabalhadas_mes")
 	private Duration horasTrabalhadaMes;
 
@@ -42,11 +39,8 @@ public class Garcom extends Usuario {
 	@JoinColumn(name = "role_id")
 	private Role role;
 
-	public Garcom(Long id, String nome, String username, String password, String cpf, Role permissao,
-			LocalDateTime horasTrabalhadasSemana, Duration horasTrabalhadaMes, BigDecimal salario,
-			Set<Comanda> comandaDoGarcom, Role role) {
+	public Garcom(Long id, String nome, String username, String password, String cpf, Role permissao, Duration horasTrabalhadaMes, BigDecimal salario,Set<Comanda> comandaDoGarcom, Role role) {
 		super(id, nome, username, password, cpf, role);
-		this.horasTrabalhadasSemana = horasTrabalhadasSemana;
 		this.horasTrabalhadaMes = horasTrabalhadaMes;
 		this.salario = salario;
 		this.comandaDoGarcom = comandaDoGarcom;
@@ -63,14 +57,6 @@ public class Garcom extends Usuario {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public LocalDateTime getHorasTrabalhadasSemana() {
-		return horasTrabalhadasSemana;
-	}
-
-	public void setHorasTrabalhadasSemana(LocalDateTime horasTrabalhadasSemana) {
-		this.horasTrabalhadasSemana = horasTrabalhadasSemana;
 	}
 
 	public Duration getHorasTrabalhadaMes() {
@@ -130,7 +116,7 @@ public class Garcom extends Usuario {
 
 	@Override
 	public String toString() {
-		return "Garcom [id=" + id + ", horasTrabalhadasSemana=" + horasTrabalhadasSemana + ", horasTrabalhadaMes="
+		return "Garcom [id=" + id + ", horasTrabalhadaMes="
 				+ horasTrabalhadaMes + ", salario=" + salario + ", comandaDoGarcom=" + comandaDoGarcom + ", role="
 				+ role + "]";
 	}

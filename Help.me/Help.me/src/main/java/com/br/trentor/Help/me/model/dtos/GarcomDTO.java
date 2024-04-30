@@ -22,40 +22,35 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 
-
-@JsonPropertyOrder({ "id", "nome", "username", "cpf", "horasTrabalhadasSemana", "horasTrabalhadaMes", "salario", "role" })
+@JsonPropertyOrder({ "id", "nome", "username", "cpf", "horasTrabalhadaMes", "salario", "role" })
 public class GarcomDTO {
 
-    private Long id;
-    private String nome;
-    private String username;
-    private String cpf;
-    private LocalDateTime horasTrabalhadasSemana;
-    private Duration horasTrabalhadaMes;
-    private BigDecimal salario;
-    private Role role; // Propriedade para representar a permissão do garçom
+	private Long id;
+	private String nome;
+	private String username;
+	private String cpf;
+	private Duration horasTrabalhadaMes;
+	private BigDecimal salario;
+	private Role role; // Propriedade para representar a permissão do garçom
 
 	private Set<Comanda> comandaDoGarcom = new TreeSet();
 
-	
-	public GarcomDTO(Long id, String nome, String username, String cpf, LocalDateTime horasTrabalhadasSemana,
-			Duration horasTrabalhadaMes, BigDecimal salario, Role role, Set<Comanda> comandaDoGarcom) {
+	public GarcomDTO(Long id, String nome, String username, String cpf, Duration horasTrabalhadaMes, BigDecimal salario,
+			Role role, Set<Comanda> comandaDoGarcom) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.username = username;
 		this.cpf = cpf;
-		this.horasTrabalhadasSemana = horasTrabalhadasSemana;
 		this.horasTrabalhadaMes = horasTrabalhadaMes;
 		this.salario = salario;
-		this.role = new Role();
+		this.role = role;
 		this.comandaDoGarcom = comandaDoGarcom;
 	}
 
 	public GarcomDTO() {
-		
+
 	}
-	
 
 	public Long getId() {
 		return id;
@@ -87,14 +82,6 @@ public class GarcomDTO {
 
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
-	}
-
-	public LocalDateTime getHorasTrabalhadasSemana() {
-		return horasTrabalhadasSemana;
-	}
-
-	public void setHorasTrabalhadasSemana(LocalDateTime horasTrabalhadasSemana) {
-		this.horasTrabalhadasSemana = horasTrabalhadasSemana;
 	}
 
 	public Duration getHorasTrabalhadaMes() {
@@ -150,12 +137,8 @@ public class GarcomDTO {
 	@Override
 	public String toString() {
 		return "GarcomDTO [id=" + id + ", nome=" + nome + ", username=" + username + ", cpf=" + cpf
-				+ ", horasTrabalhadasSemana=" + horasTrabalhadasSemana + ", horasTrabalhadaMes=" + horasTrabalhadaMes
-				+ ", salario=" + salario + ", role=" + role + ", comandaDoGarcom=" + comandaDoGarcom + "]";
+				+ ", horasTrabalhadaMes=" + horasTrabalhadaMes + ", salario=" + salario + ", role=" + role
+				+ ", comandaDoGarcom=" + comandaDoGarcom + "]";
 	}
-	
-	
 
-	
-	
 }

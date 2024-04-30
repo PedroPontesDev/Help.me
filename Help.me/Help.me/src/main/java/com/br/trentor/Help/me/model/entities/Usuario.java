@@ -23,16 +23,16 @@ public abstract class Usuario implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@Column(name = "nome")
 	private String nome;
-
+	@Column(name = "username")
 	private String username;
-
+	@Column(name = "password")
 	private String password;
-
+	@Column(name = "cpf")
 	private String cpf;
 
 	public Usuario(Long id, String nome, String username, String password, String cpf, Role permissao) {
-		super();
 		this.id = id;
 		this.nome = nome;
 		this.username = username;
