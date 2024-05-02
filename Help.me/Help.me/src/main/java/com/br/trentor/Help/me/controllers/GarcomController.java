@@ -30,7 +30,7 @@ public class GarcomController {
 	@Operation(summary = "Registrar novo garçom ao banco de dados", description = "Method is gonna be implemented authorization, everthing is beeing builded")
 	@PostMapping(path = "/registrar-garcom", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<GarcomDTO> registrarNovoGarcom(@RequestBody GarcomDTO novoGarcom) throws Exception {
-		GarcomDTO register = garcomServices.registrarNovoGarcom(novoGarcom);
+		GarcomDTO register = garcomServices.registrarnovoGarcom(novoGarcom);
 		return new ResponseEntity<>(register, HttpStatus.CREATED);
 	}
 	

@@ -6,8 +6,6 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.TreeSet;
 
-import org.apache.catalina.realm.JNDIRealm.User;
-
 import com.br.trentor.Help.me.model.entities.Comanda;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
