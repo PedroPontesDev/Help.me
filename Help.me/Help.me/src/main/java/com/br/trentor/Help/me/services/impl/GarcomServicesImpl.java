@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,10 +12,12 @@ import org.springframework.stereotype.Service;
 import com.br.trentor.Help.me.model.dtos.GarcomDTO;
 import com.br.trentor.Help.me.model.entities.Garcom;
 import com.br.trentor.Help.me.model.entities.Role;
+import com.br.trentor.Help.me.model.entities.Usuario;
 import com.br.trentor.Help.me.model.entities.security.enumerated.TipoUsuario;
 import com.br.trentor.Help.me.model.mapper.MyMaper;
 import com.br.trentor.Help.me.repositories.GarcomRepositories;
 import com.br.trentor.Help.me.repositories.RoleRepositories;
+import com.br.trentor.Help.me.repositories.UsuarioRepositories;
 import com.br.trentor.Help.me.services.GarcomServices;
 
 import jakarta.transaction.Transactional;
@@ -28,23 +31,32 @@ public class GarcomServicesImpl implements GarcomServices {
 	@Autowired
 	RoleRepositories permissaoRepository;
 
+	@Autowired
+	UsuarioRepositories userRepository;
+	
+	@Autowired
+	private Logger logger;
+	
 	@Override
 	@Transactional(rollbackOn = Exception.class)
-	public GarcomDTO registrarNovoGarcom(GarcomDTO novoGarcom) throws Exception {
-		if (novoGarcom == null)	throw new IllegalArgumentException("Os dados parecem estar nulos, verifique os dados e tente novamente!");
-		Garcom garcomRegistrado = MyMaper.parseObject(novoGarcom, Garcom.class);
-		if(garcomRegistrado == null) throw new IllegalArgumentException("Os dados parecem estar nulos, verifique os dados e tente novamente!");
-		garcomRegistrado.setUsername(novoGarcom.getUsername());
-		garcomRegistrado.setNome(novoGarcom.getNome());
-		garcomRegistrado.setCpf(novoGarcom.getCpf());
-		garcomRegistrado.setHorasTrabalhadaMes(novoGarcom.getHorasTrabalhadaMes());
-		garcomRegistrado.setSalario(novoGarcom.getSalario());
-		garcomRegistrado.setComandaDoGarcom(new TreeSet<>());
+	public GarcomDTO registrarnovoGarcom(GarcomDTO newGarcom) throws Exception {
+		if (newGarcom == null)
+			throw new IllegalArgumentException("Os dados parecem estar nulos, verifique os dados e tente novamente!");
+		// Mapeando as Respectivas Entidades de Garçom para Salvar Como Um Usuario no
+		// Banco Respeitando a Metodologia De Herança Do JPA COM A ESTRATÉGIA ->
+		// JOINED//
+		Garcom novoGarcom = MyMaper.parseObject(newGarcom, Garcom.class);
+		Usuario garcomUser = new Usuario(null, novoGarcom.getNome(), novoGarcom.getUsername(), novoGarcom.getPassword(),
+				novoGarcom.getCpf(), novoGarcom.getRole());
+		garcomUser = userRepository.save(garcomUser);
+		// Atribuir a role ao garçom
 		Role role = permissaoRepository.findByTipoDeUsuario(TipoUsuario.GARCOM);
-		if(role == null) throw new Exception("Essa permissão é inexistente!");
-		garcomRegistrado.setRole(role);
-		Garcom saved = garcomRepository.save(garcomRegistrado);
-		return MyMaper.parseObject(saved, GarcomDTO.class);
+		novoGarcom.setRole(role);
+		Garcom persisted = garcomRepository.save(novoGarcom);
+		var dto = MyMaper.parseObject(persisted, GarcomDTO.class);
+		logger.info("Garçom Registred: " + persisted + "-> USER: " +  garcomUser );
+		return dto;
+
 	}
 
 	@Override

@@ -1,0 +1,6 @@
+garcomRegistrado.setUsername(novoGarcom.getUsername());
+		garcomRegistrado.setNome(novoGarcom.getNome());
+		garcomRegistrado.setCpf(novoGarcom.getCpf());
+		garcomRegistrado.setHorasTrabalhadaMes(novoGarcom.getHorasTrabalhadaMes());
+		garcomRegistrado.setSalario(novoGarcom.getSalario());
+		garcomRegistrado.setComandaDoGarcom(new TreeSet<>());

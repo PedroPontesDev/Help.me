@@ -15,10 +15,13 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.PrimaryKeyJoinColumn;
+import jakarta.persistence.PrimaryKeyJoinColumns;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "tb_garcom")
+@PrimaryKeyJoinColumn(name = "id")
 public class Garcom extends Usuario {
 	private static final long serialVersionUID = 1L;
 
